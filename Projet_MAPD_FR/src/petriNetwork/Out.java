@@ -66,7 +66,7 @@ public class Out extends Edge {
 	}
 
 	/**
-	 * @param args
+	 * @param argsa
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
