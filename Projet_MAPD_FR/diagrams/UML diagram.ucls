@@ -48,7 +48,7 @@
   </class>  
   <interface id="6" language="java" name="interfaces.AddEdge" project="Projet_MAPD_FR" 
     file="/Projet_MAPD_FR/src/interfaces/AddEdge.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="79" width="198" x="324" y="115"/>    
+    <position height="-1" width="-1" x="421" y="103"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
