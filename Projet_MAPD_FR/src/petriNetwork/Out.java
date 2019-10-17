@@ -2,7 +2,6 @@
  * 
  */
 package petriNetwork;
-import java.util.ArrayList;
 
 /**
  * Inherits abstract class Edge
@@ -78,8 +77,6 @@ public class Out extends Edge {
 		// TEST2 : constructor with parameters
 		Edge eOut2 = new Out(7);
 		System.out.println(eOut2.toString());
-		
-
 	}
 
 }

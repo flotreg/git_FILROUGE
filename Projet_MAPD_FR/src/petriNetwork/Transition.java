@@ -1,6 +1,7 @@
 package petriNetwork;
 
 import exceptions.AddEdgeException;
+import java.util.ArrayList;
 import interfaces.AddEdge;
 
 /** 
@@ -10,8 +11,8 @@ public class Transition implements AddEdge{
 	
 	private boolean isFirable;
 	private Place myPlaces;
-	private In myIns;
-	private Out myOuts;
+	private ArrayList<In> myIns;
+	private ArrayList<Out> myOuts;
 
 	/** 
 	 * Constructors, settors and gettors
@@ -29,7 +30,7 @@ public class Transition implements AddEdge{
 	 * @param nMyIns
 	 * @param nMyOuts
 	 */
-	public Transition(boolean nIsFirable, Place nMyPlaces,In nMyIns,Out nMyOuts) {
+	public Transition(boolean nIsFirable, Place nMyPlaces,ArrayList<In> nMyIns,ArrayList<Out> nMyOuts) {
 		this.isFirable = nIsFirable;
 		this.myPlaces = nMyPlaces;
 		this.myIns = nMyIns;
