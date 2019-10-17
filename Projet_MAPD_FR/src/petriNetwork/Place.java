@@ -5,7 +5,7 @@ package petriNetwork;
 
 import exceptions.AddEdgeException;
 import interfaces.AddEdge;
-import edges.EdgeTypes;
+import edges.*;
 
 /**
  * Place holds tokens
@@ -83,10 +83,10 @@ public class Place implements AddEdge {
 		} else {
 			switch (e) {
 			case RegularIn:
-				new In(weight, this, (Transition) dest);
+				new RegularIn(weight, this, (Transition) dest);
 				break;
 			case RegularOut:
-				new Out(weight, this, (Transition) dest);
+				new RegularOut(weight, this, (Transition) dest);
 				break;
 			case ZeroIn:
 				break;

@@ -12,6 +12,8 @@ public class Transition implements AddEdge{
 	/*
 	 * ATTRIBUTES
 	 */
+	private static int counter = 0;
+	private int identifier;
 	private ArrayList<Place> myPlaces;
 	private ArrayList<In> myIns;
 	private ArrayList<Out> myOuts;
@@ -20,6 +22,8 @@ public class Transition implements AddEdge{
 	 * CONSTRUCTORS
 	 */
 	public Transition() {
+		counter += 1;
+		this.identifier = counter;
 		this.myPlaces = null;
 		this.myIns = null;
 		this.myOuts = null;
@@ -32,6 +36,8 @@ public class Transition implements AddEdge{
 	 * @param nMyOuts
 	 */
 	public Transition(ArrayList<Place> nMyPlaces,ArrayList<In> nMyIns,ArrayList<Out> nMyOuts) {
+		counter += 1;
+		this.identifier = counter;
 		this.myPlaces = nMyPlaces;
 		this.myIns = nMyIns;
 		this.myOuts = nMyOuts; 
@@ -51,12 +57,15 @@ public class Transition implements AddEdge{
 	/*
 	 * REDEFINITION
 	 */
+	/**
+	 * toString redefined : identifier of the transition
+	 */
+	@Override
 	public String toString() {
-		return "\n, myplaces : "
-				+myPlaces+"\n, myIns : "
-				+myIns+"\n, myOuts : "
-				+myOuts;
+		return "Transition n° : " + this.identifier;
 	}
+	
+	
 	public boolean isFirable(boolean activable) {
 		boolean b = true;
 		for (In in : myIns) {
