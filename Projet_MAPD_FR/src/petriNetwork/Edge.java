@@ -1,8 +1,11 @@
 package petriNetwork;
 
+import edges.*;
+
 /**
- * This abstract class represents the edge It shares global edge attributes It
- * forces global edge behaviors
+ * This abstract class represents the edge.
+ * It shares global edge attributes.
+ * It forces global edge behaviors.
  * 
  * @author Bonjour
  * @version 1
@@ -56,7 +59,6 @@ public abstract class Edge {
 
 	/**
 	 * constructor with weight parameter
-	 * 
 	 * @param weight
 	 */
 	public Edge(int w) {
@@ -69,7 +71,6 @@ public abstract class Edge {
 
 	/**
 	 * constructor with weight, place and transition
-	 * 
 	 * @param weight, place, transition
 	 */
 	public Edge(int w, Place p, Transition t) {
@@ -85,7 +86,6 @@ public abstract class Edge {
 	 */
 	/**
 	 * getter of weight
-	 * 
 	 * @return weight of the edge
 	 */
 	public int getWeight() {
@@ -94,7 +94,6 @@ public abstract class Edge {
 
 	/**
 	 * setter of weight
-	 * 
 	 * @param weight
 	 */
 	public void setWeight(int weight) {
@@ -128,7 +127,10 @@ public abstract class Edge {
 	public void setMyTransition(Transition myTransition) {
 		this.myTransition = myTransition;
 	}
-	
+	/**
+	 * getter of the edge identifier
+	 * @return identifier
+	 */
 	public int getIdentifier() {
 		return identifier;
 	}
@@ -141,8 +143,8 @@ public abstract class Edge {
 	 * OVERRIDE METHODS
 	 */
 	/**
-	 * Redefinition of toString : Gives the identifier, the weight, the place and
-	 * the transition
+	 * Redefinition of toString : 
+	 * Gives the identifier, the weight, the place and the transition
 	 */
 	@Override
 	public String toString() {
@@ -204,6 +206,25 @@ public abstract class Edge {
 		System.out.println("poids de la transition : " + eOut3.getWeight());
 		((Out) eOut3).fill();
 		System.out.println("résultat du fill/step : " + eOut3.getMyPlace().getTokens());
+		
+		// TEST 7 : empty() for EmptierIn :
+		System.out.println("\n // TEST 7 : empty() for EmptierIn :");
+		Edge eEmptierIn1 = new EmptierIn(34, new Place(72), new Transition());
+		System.out.println("nombre de jetons de la place : " + eEmptierIn1.getMyPlace().getTokens());
+		System.out.println("poids de la transition : " + eEmptierIn1.getWeight());
+		((EmptierIn) eEmptierIn1).step();
+		System.out.println("résultat du fill/step : " + eEmptierIn1.getMyPlace().getTokens());
+		
+		
+		// TEST 8 : zero() for ZeroIn : 
+		System.out.println("\n // TEST 8 : zero() for ZeroIn : ");
+		Edge eZeroIn1 = new ZeroIn(22, new Place(178), new Transition());
+		System.out.println("nombre de jetons de la place : " + eZeroIn1.getMyPlace().getTokens());
+		System.out.println("poids de la transition : " + eZeroIn1.getWeight());
+		System.out.println("La transition est-elle activable ? " + ((ZeroIn) eZeroIn1).activable());
+		((ZeroIn) eZeroIn1).step();
+		System.out.println("résultat du fill/step : " + eEmptierIn1.getMyPlace().getTokens());
+		
 
 	}
 
