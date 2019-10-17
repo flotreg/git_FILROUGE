@@ -17,16 +17,12 @@ public class Out extends Edge {
 	private Transition myTransition;
 	private Place myPlace;
 	/**
-	 * Constructor without parameters referring to Edge constructor
+	 * CONSTRUCTORS
 	 */
 	public Out() {
 		super();
 	}
 	
-	/**
-	 * Constructor with parameters referring to Edge constructor
-	 * @param weight
-	 */
 	public Out(int weight) {
 		super(weight);
 	}
@@ -49,8 +45,15 @@ public class Out extends Edge {
 	public void setMyPlace(Place myPlace) {
 		this.myPlace = myPlace;
 	}
+	
 	/*
-	 * Redefinition of toString Method
+	 * OWN METHODS
+	 */
+	public void fill() {
+		myPlace.setTokens(myPlace.getTokens()+this.getWeight());
+	}
+	/*
+	 * REDEFINITION
 	 * @see petriNetwork.Edge#toString()
 	 */
 
@@ -61,12 +64,9 @@ public class Out extends Edge {
 	+"\nMa transition :"+this.myPlace;
 	}
 	
-	public void fill() {
-		myPlace.setTokens(myPlace.getTokens()+this.getWeight());
-	}
 
 	/**
-	 * @param argsa
+	 * MAIN
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -78,15 +78,6 @@ public class Out extends Edge {
 		// TEST2 : constructor with parameters
 		Edge eOut2 = new Out(7);
 		System.out.println(eOut2.toString());
-		
-		//TEST3 : fill() method
-		Out eOut3 = new Out(3);
-		ArrayList<Out> myOut = new ArrayList<Out>();
-		myOut.add(eOut3);
-		Place p = new Place(3,new ArrayList<In>(),myOut);
-		System.out.println(p);
-		eOut3.fill();
-		System.out.println(p);
 		
 
 	}
