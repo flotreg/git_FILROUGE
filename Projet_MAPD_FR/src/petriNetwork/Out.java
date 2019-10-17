@@ -1,6 +1,3 @@
-/**
- * 
- */
 package petriNetwork;
 
 /**
@@ -12,71 +9,71 @@ public class Out extends Edge {
 	
 	/*
 	 * ATTRIBUTES
-	 */
-	private Transition myTransition;
-	private Place myPlace;
-	/**
+	 * -> every attributes inherited from Edge.
+	 */ 
+	
+	/*
 	 * CONSTRUCTORS
+	 */
+	/**
+	 * Constructor of Out without parameter
+	 *  that calls the constructor of Edge
 	 */
 	public Out() {
 		super();
 	}
-	
+
+	/**
+	 * Constructor of Out with weight parameter
+	 * that calls constructor with parameters of Edge
+	 * 
+	 * @param weight
+	 */
 	public Out(int weight) {
 		super(weight);
 	}
+
+	/**
+	 * Constructor of Out with parameters of weight, Place and Transition
+	 * that calls constructor of Edge with same parameters
+	 */
+	public Out(int weight, Place p, Transition t) {
+		super(weight, p, t);
+	}
+	
 	/*
-	 * GETTORS AND SETTORS
+	 * GETTERS AND SETTERS
 	 */
 	
-	public Transition getMyTransition() {
-		return myTransition;
-	}
-
-	public void setMyTransition(Transition myTransition) {
-		this.myTransition = myTransition;
-	}
-
-	public Place getMyPlace() {
-		return myPlace;
-	}
-
-	public void setMyPlace(Place myPlace) {
-		this.myPlace = myPlace;
-	}
 	
 	/*
 	 * OWN METHODS
 	 */
 	public void fill() {
-		myPlace.setTokens(myPlace.getTokens()+this.getWeight());
+		getMyPlace().setTokens(getMyPlace().getTokens()+this.getWeight());
 	}
+	
 	/*
 	 * REDEFINITION
-	 * @see petriNetwork.Edge#toString()
 	 */
-
+	/**
+	 * toString() redefined
+	 * adds the type of the Edge.
+	 */
 	public String toString() {
-		return "In :\n"
-	+"Mon poids : "+this.getWeight()
-	+"\nMa place : "+this.myTransition
-	+"\nMa transition :"+this.myPlace;
+		return super.toString() + "\n     Type : " + this.getClass().getName();
 	}
 	
 
+	/*
+	 * MAIN FOR TESTING
+	 * -> tests in the Edge class
+	 */
 	/**
-	 * MAIN
+	 * 
+	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		// TEST1 : constructor without parameters
-		Edge eOut1 = new Out();
-		System.out.println(eOut1.toString());
-		
-		// TEST2 : constructor with parameters
-		Edge eOut2 = new Out(7);
-		System.out.println(eOut2.toString());
 	}
 
 }
