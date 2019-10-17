@@ -161,23 +161,23 @@ public abstract class Edge {
 	public static void main(String[] args) {
 		// TEST 1 : constructor without param + toString
 		System.out.println("\n TEST 1 : constructor without param + toString :");
-		Edge eIn1 = new In();
+		Edge eIn1 = new RegularIn();
 		System.out.println(eIn1);
-		Edge eOut1 = new Out();
+		Edge eOut1 = new RegularOut();
 		System.out.println(eOut1);
 
 		// TEST 2 : constructor with weight param + toString
 		System.out.println("\n // TEST 2 : constructor with weight param + toString :");
-		Edge eIn2 = new In(18);
+		Edge eIn2 = new RegularIn(18);
 		System.out.println(eIn2);
-		Edge eOut2 = new Out(5);
+		Edge eOut2 = new RegularOut(5);
 		System.out.println(eOut2);
 
 		// TEST 3 : constructor with all params + toString
 		System.out.println("\n // TEST 3 : constructor with all params + toString : ");
-		Edge eIn3 = new In(72, new Place(), new Transition());
+		Edge eIn3 = new RegularIn(72, new Place(), new Transition());
 		System.out.println(eIn3);
-		Edge eOut3 = new Out(5, new Place(), new Transition());
+		Edge eOut3 = new RegularOut(5, new Place(), new Transition());
 		System.out.println(eOut3);
 
 		// TEST 4 : activable and empty() for In : NO
@@ -186,7 +186,7 @@ public abstract class Edge {
 		System.out.println("nombre de jetons de la place : " + eIn3.getMyPlace().getTokens());
 		System.out.println("poids de la transition : " + eIn3.getWeight());
 		System.out.println("est activable ? " + ((In) eIn3).activable());
-		((In) eIn3).empty();
+		((In) eIn3).step();
 		System.out.println("résultat du empty/step : "  + eIn3.getMyPlace().getTokens());
 
 		// TEST 5 : activable and empty() for In : YES
@@ -196,7 +196,7 @@ public abstract class Edge {
 		System.out.println("poids de la transition : " + eIn3.getWeight());
 		System.out.println("est activable ? " + ((In) eIn3).activable());
 		System.out.println(((In) eIn3).activable());
-		((In) eIn3).empty();
+		((In) eIn3).step();
 		System.out.println("résultat du empty/step : " + eIn3.getMyPlace().getTokens());
 		
 		// TEST 6 : fill() for Out : 
@@ -204,7 +204,7 @@ public abstract class Edge {
 		eOut3.setMyPlace(new Place(12));
 		System.out.println("nombre de jetons de la place : " + eOut3.getMyPlace().getTokens());
 		System.out.println("poids de la transition : " + eOut3.getWeight());
-		((Out) eOut3).fill();
+		((Out) eOut3).step();
 		System.out.println("résultat du fill/step : " + eOut3.getMyPlace().getTokens());
 		
 		// TEST 7 : empty() for EmptierIn :
