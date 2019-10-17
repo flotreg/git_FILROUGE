@@ -5,7 +5,6 @@ package petriNetwork;
 
 import exceptions.AddEdgeException;
 import interfaces.AddEdge;
-import java.util.ArrayList;
 
 /**
  * Place holds tokens
@@ -14,23 +13,40 @@ import java.util.ArrayList;
  */
 public class Place implements AddEdge{
 	
+	/*
+	 * ATTRIBUTES
+	 */
+	/**
+	 * number of tokens
+	 */
 	private int tokens;
-	private ArrayList<In> myIns;
-	private ArrayList<Out> myOuts;
+
+	/**
+	 * static counter to build the identifier
+	 */
+	private static int counter = 0;
+
+	/**
+	 * identifier of the object
+	 */
+	private int identifier;
 	
+	/*
+	 * CONSTRUCTORS
+	 */
 	/**
 	 * Constructor without parameters
 	 */
 	public Place() {
+		counter += 1;
+		this.identifier = counter;
 		this.tokens = 0;
-		this.myIns = null;
-		this.myOuts = null;
 	}
 	
-	public Place(int tokens, ArrayList<In> myIns, ArrayList<Out> myOuts) {
+	public Place(int tokens) {
+		counter += 1;
+		this.identifier = counter;
 		this.tokens = tokens;
-		this.myIns = myIns;
-		this.myOuts = myOuts;
 	}
 	
 	/**
@@ -38,9 +54,7 @@ public class Place implements AddEdge{
 	 */
 	public String toString() {
 		return "This place is " + super.toString() +
-				"\n It contains " + this.tokens + " tokens." +
-				"\n It is related to the following edge in : " + this.myIns +
-				"\n It is related to the follwing edge out : " + this.myOuts;
+				"\n It contains " + this.tokens + " tokens.";
 	}
 	
 	/**
@@ -59,16 +73,17 @@ public class Place implements AddEdge{
 	
 	/**
 	 * addEdge redefinition
-	 * @Override
+	 * 
 	 */
+	@Override
 	public void addEdge(AddEdge dest, boolean inOut, int weight) throws AddEdgeException {
 		if(!(dest instanceof Transition)) {
 			throw new AddEdgeException();
 		}else{
 			if(inOut) {
-				this.myIns.add(new In(weight));
-			}else{
-				this.myOuts.add(new Out(weight));
+				new In(weight, this, (Transition)dest);
+			} else {
+				new Out(weight, this, (Transition)dest);
 			}
 		}
 		
@@ -89,11 +104,7 @@ public class Place implements AddEdge{
 		
 		// TEST 2: constructor with parameters + toString
 		System.out.println("\n TEST 2: constructor with parameters + toString");
-		Place place2 = new Place(9, new ArrayList<In>(), new ArrayList<Out>());
-		place2.myIns.add(new In(3));
-		place2.myIns.add(new In(5));
-		place2.myOuts.add(new Out(4));
-		place2.myOuts.add(new Out(6));
+		Place place2 = new Place(9);
 		System.out.println(place2.toString());
 		
 		// TEST 3 : AddEdge()

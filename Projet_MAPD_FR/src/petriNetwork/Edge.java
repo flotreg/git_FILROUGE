@@ -1,7 +1,5 @@
 package petriNetwork;
 
-import java.util.ArrayList;
-
 /**
  * This abstract class represents the edge It shares global edge attributes It
  * forces global edge behaviors
@@ -178,7 +176,7 @@ public abstract class Edge {
 
 		// TEST 4 : activable and empty() for In : NO
 		System.out.println("\n // TEST 4 : activable and empty() for In : NO :");
-		eIn3.setMyPlace(new Place(48, new ArrayList<In>(), new ArrayList<Out>()));
+		eIn3.setMyPlace(new Place(48));
 		System.out.println("nombre de jetons de la place : " + eIn3.getMyPlace().getTokens());
 		System.out.println("poids de la transition : " + eIn3.getWeight());
 		System.out.println("est activable ? " + ((In) eIn3).activable());
@@ -187,7 +185,7 @@ public abstract class Edge {
 
 		// TEST 5 : activable and empty() for In : YES
 		System.out.println("\n // TEST 5 : activable and empty() for In : YES :");
-		eIn3.setMyPlace(new Place(198, new ArrayList<In>(), new ArrayList<Out>()));
+		eIn3.setMyPlace(new Place(198));
 		System.out.println("nombre de jetons de la place : " + eIn3.getMyPlace().getTokens());
 		System.out.println("poids de la transition : " + eIn3.getWeight());
 		System.out.println("est activable ? " + ((In) eIn3).activable());
@@ -197,7 +195,7 @@ public abstract class Edge {
 		
 		// TEST 6 : fill() for Out : 
 		System.out.println("\n // TEST 6 : fill() for Out : ");
-		eOut3.setMyPlace(new Place(12, new ArrayList<In>(), new ArrayList<Out>()));
+		eOut3.setMyPlace(new Place(12));
 		System.out.println("nombre de jetons de la place : " + eOut3.getMyPlace().getTokens());
 		System.out.println("poids de la transition : " + eOut3.getWeight());
 		((Out) eOut3).fill();
