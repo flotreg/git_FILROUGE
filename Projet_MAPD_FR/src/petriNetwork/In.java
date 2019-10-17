@@ -11,10 +11,11 @@ package petriNetwork;
  * @version 1
  * @since 17/10/2019
  */
-public class In extends Edge {
+public abstract class In extends Edge {
 
 	/*
-	 * ATTRIBUTES -> every attributes are inherited from Edge.
+	 * ATTRIBUTES 
+	 * -> every attributes are inherited from Edge.
 	 */
 
 	/*
@@ -38,7 +39,8 @@ public class In extends Edge {
 	}
 
 	/**
-	 * Constructor of In with parameters of weight, Place and Transition that calls
+	 * Constructor of In with parameters of weight, 
+	 * Place and Transition that calls
 	 * constructor of Edge with same parameters
 	 */
 	public In(int weight, Place p, Transition t) {
@@ -54,33 +56,23 @@ public class In extends Edge {
 	 */
 
 	/**
-	 * Take the tokens from the start place
+	 * Abstract to force children.
+	 * Makes something with the token of the starting place.
 	 */
-	public void empty() {
-		if(this.activable()) {
-			// intermediate variables for lisibility
-			int tokens = this.getMyPlace().getTokens();
-			int weight = this.getWeight();
-			this.getMyPlace().setTokens(tokens - weight);
-		}
-	}
+	public abstract void step();
 
 	/**
-	 * Check that there is enough tokens in the start place This is used by the
-	 * transition to fire the petri network
+	 * Abstract to force children.
+	 * Check that the edge can be activated.
 	 */
-	public boolean activable() {
-		// intermediate variables for lisibility
-		int tokens = this.getMyPlace().getTokens();
-		int weight = this.getWeight();
-		return (weight <= tokens) ? true : false;
-	}
+	public abstract boolean activable();
 
 	/*
 	 * REDEFINITION
 	 */
 	/**
-	 * toString() redefined adds the type of the Edge.
+	 * toString() redefined.
+	 * Adds the type of the Edge.
 	 */
 	public String toString() {
 		return super.toString() + "\n     Type : IN";

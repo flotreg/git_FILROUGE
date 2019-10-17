@@ -5,7 +5,7 @@ package petriNetwork;
  * @author Bonjour
  *
  */
-public class Out extends Edge {
+public abstract class Out extends Edge {
 	
 	/*
 	 * ATTRIBUTES
@@ -49,9 +49,11 @@ public class Out extends Edge {
 	/*
 	 * OWN METHODS
 	 */
-	public void fill() {
-		getMyPlace().setTokens(getMyPlace().getTokens()+this.getWeight());
-	}
+	/**
+	 * Abstract to force children.
+	 * Makes something with the tokens of the ending place.
+	 */
+	public abstract void step();
 	
 	/*
 	 * REDEFINITION
