@@ -2,6 +2,12 @@ package petriNetwork;
 
 import exceptions.AddEdgeException;
 import java.util.ArrayList;
+
+import edges.EdgeTypes;
+import edges.RegularIn;
+import edges.RegularOut;
+import edges.ZeroIn;
+import edges.EmptierIn;
 import interfaces.AddEdge;
 
 /** 
@@ -84,15 +90,24 @@ public class Transition implements AddEdge{
 	 * @Override
 	 * 
 	 */
-	public void addEdge(AddEdge dest, boolean inOut, int weight) throws AddEdgeException {
+	public void addEdge(AddEdge dest, EdgeTypes e, int weight) throws AddEdgeException {
 		if(!(dest instanceof Place)) {
 			throw new AddEdgeException();
-		}else{
-			if(inOut) {
-				myIns.add(new In(weight,(Place)dest,this));
-			} else {
-				myOuts.add(new Out(weight, (Place)dest,this));
-			}
+		} else {
+				switch (e) {
+				case RegularIn:
+					myIns.add(new RegularIn(weight,(Place)dest,this));
+					break;
+				case RegularOut:
+					myOuts.add(new RegularOut(weight,(Place)dest,this));
+					break;
+				case ZeroIn:
+					myIns.add(new ZeroIn(weight,(Place)dest,this));
+					break;
+				case EmptierIn:
+					myIns.add(new EmptierIn(weight,(Place)dest,this));
+					break;
+				}
 		}
 		
 	}
@@ -134,7 +149,7 @@ public class Transition implements AddEdge{
 		//TEST 4 : AddEdge()
 		System.out.println("\nTEST3 : addEdge()");
 		try {
-			trans2.addEdge(new Place(3), true, 3);
+			trans2.addEdge(new Place(3), EdgeTypes.RegularIn, 3);
 		} catch(AddEdgeException e) {
 			e.printStackTrace();
 		}
