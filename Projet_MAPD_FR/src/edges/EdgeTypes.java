@@ -1,9 +1,9 @@
 package edges;
 
 public enum EdgeTypes {
-	In,
+	RegularIn,
 	ZeroIn,
 	EmptierIn,
-	Out;
+	RegularOut;
 	
 }

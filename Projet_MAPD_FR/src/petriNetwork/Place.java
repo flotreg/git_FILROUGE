@@ -82,10 +82,10 @@ public class Place implements AddEdge {
 			throw new AddEdgeException();
 		} else {
 			switch (e) {
-			case In:
+			case RegularIn:
 				new In(weight, this, (Transition) dest);
 				break;
-			case Out:
+			case RegularOut:
 				new Out(weight, this, (Transition) dest);
 				break;
 			case ZeroIn:
@@ -117,7 +117,7 @@ public class Place implements AddEdge {
 		// TEST 3 : AddEdge() : IN
 		System.out.println("\n TEST 3 : AddEdge() : IN");
 		try {
-			place2.addEdge(new Transition(), EdgeTypes.In, 2);
+			place2.addEdge(new Transition(), EdgeTypes.RegularIn, 2);
 		} catch (AddEdgeException e) {
 			e.printStackTrace();
 		} finally {
@@ -127,7 +127,7 @@ public class Place implements AddEdge {
 		// TEST 4 : AddEdge() : OUT
 		System.out.println("\n TEST 4 : AddEdge() : OUT");
 		try {
-			place2.addEdge(new Transition(), EdgeTypes.Out, 6);
+			place2.addEdge(new Transition(), EdgeTypes.RegularOut, 6);
 		} catch (AddEdgeException e) {
 			e.printStackTrace();
 		} finally {
