@@ -1,6 +1,7 @@
 package interfaces;
 
 import exceptions.AddEdgeException;
+import edges.EdgeTypes;
 
 /**
  * This interface makes it possible to add edges. 
@@ -18,7 +19,7 @@ public interface AddEdge {
 	 * @param weight : the weight of the edge
 	 * @throws AddEdgeException
 	 */
-	public void addEdge(AddEdge dest, boolean inOut, int weight) throws AddEdgeException;
+	public void addEdge(AddEdge dest, EdgeTypes e, int weight) throws AddEdgeException;
 
 
 }

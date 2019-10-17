@@ -5,14 +5,16 @@ package petriNetwork;
 
 import exceptions.AddEdgeException;
 import interfaces.AddEdge;
+import edges.EdgeTypes;
 
 /**
  * Place holds tokens
+ * 
  * @author Bonjour
  *
  */
-public class Place implements AddEdge{
-	
+public class Place implements AddEdge {
+
 	/*
 	 * ATTRIBUTES
 	 */
@@ -30,7 +32,7 @@ public class Place implements AddEdge{
 	 * identifier of the object
 	 */
 	private int identifier;
-	
+
 	/*
 	 * CONSTRUCTORS
 	 */
@@ -42,21 +44,20 @@ public class Place implements AddEdge{
 		this.identifier = counter;
 		this.tokens = 0;
 	}
-	
+
 	public Place(int tokens) {
 		counter += 1;
 		this.identifier = counter;
 		this.tokens = tokens;
 	}
-	
+
 	/**
 	 * Redefinition of the toString() method
 	 */
 	public String toString() {
-		return "This place is " + super.toString() +
-				"\n It contains " + this.tokens + " tokens.";
+		return "Place n° " + identifier + ". Tokens : " +tokens;
 	}
-	
+
 	/**
 	 * @return the tokens
 	 */
@@ -70,57 +71,70 @@ public class Place implements AddEdge{
 	public void setTokens(int tokens) {
 		this.tokens = tokens;
 	}
-	
+
 	/**
 	 * addEdge redefinition
 	 * 
 	 */
 	@Override
-	public void addEdge(AddEdge dest, boolean inOut, int weight) throws AddEdgeException {
-		if(!(dest instanceof Transition)) {
+	public void addEdge(AddEdge dest, EdgeTypes e, int weight) throws AddEdgeException {
+		if (!(dest instanceof Transition)) {
 			throw new AddEdgeException();
-		}else{
-			if(inOut) {
-				new In(weight, this, (Transition)dest);
-			} else {
-				new Out(weight, this, (Transition)dest);
+		} else {
+			switch (e) {
+			case In:
+				new In(weight, this, (Transition) dest);
+				break;
+			case Out:
+				new Out(weight, this, (Transition) dest);
+				break;
+			case ZeroIn:
+				break;
+			case EmptierIn:
+				break;
 			}
+
 		}
-		
+
 	}
-	
-	
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+
 		// TEST 1: constructor without parameters + toString
 		System.out.println("\n TEST 1: constructor without parameters + toString");
 		Place place1 = new Place();
 		System.out.println(place1.toString());
-		
-		// TEST 2: constructor with parameters + toString
+
+		// TEST 2: constructor with weight parameter + toString
 		System.out.println("\n TEST 2: constructor with parameters + toString");
 		Place place2 = new Place(9);
 		System.out.println(place2.toString());
-		
-		// TEST 3 : AddEdge()
-		System.out.println("\n TEST 3 : AddEdge()");
+
+		// TEST 3 : AddEdge() : IN
+		System.out.println("\n TEST 3 : AddEdge() : IN");
 		try {
-			place2.addEdge(new Transition(), true, 2);
+			place2.addEdge(new Transition(), EdgeTypes.In, 2);
 		} catch (AddEdgeException e) {
 			e.printStackTrace();
 		} finally {
 			System.out.println(place2.toString());
 		}
+		
+		// TEST 4 : AddEdge() : OUT
+		System.out.println("\n TEST 4 : AddEdge() : OUT");
+		try {
+			place2.addEdge(new Transition(), EdgeTypes.Out, 6);
+		} catch (AddEdgeException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println(place2.toString());
+		}
+		
 
 	}
-
-
-
-
 
 }
