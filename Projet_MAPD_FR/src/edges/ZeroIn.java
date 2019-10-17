@@ -76,6 +76,15 @@ public class ZeroIn extends In {
 		int tokens = this.getMyPlace().getTokens();
 		return (tokens == 0) ? true : false;
 	}
+	
+	/**
+	 * toString() redefined : add subtype
+	 * @return String
+	 */
+	@Override
+	public String toString() {
+		return super.toString() +  "\n      Subtype : Zero In";
+	}
 
 	
 	

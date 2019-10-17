@@ -75,6 +75,15 @@ public class EmptierIn extends In {
 		int weight = this.getWeight();
 		return (weight <= tokens) ? true : false;
 	}
+	
+	/**
+	 * toString() redefined : add subtype
+	 * @return String
+	 */
+	@Override
+	public String toString() {
+		return super.toString() +  "\n      Subtype : Emptier In";
+	}
 
 	/*
 	 * TESTING -> tests for EmptierIn in the Edge class
