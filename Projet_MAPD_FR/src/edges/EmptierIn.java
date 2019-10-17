@@ -3,7 +3,7 @@
  */
 package edges;
 
-import petriNetwork.Edge;
+import petriNetwork.In;
 import petriNetwork.Place;
 import petriNetwork.Transition;
 
@@ -14,7 +14,7 @@ import petriNetwork.Transition;
  * @version 1
  * @since 17/10/2019
  */
-public class EmptierIn extends Edge {
+public class EmptierIn extends In {
 
 	/*
 	 * ATTRIBUTES -> inherited from Edge.
@@ -57,6 +57,7 @@ public class EmptierIn extends Edge {
 	 * This method removes all the token from the 
 	 * starting place. 
 	 */
+	@Override
 	public void step() {
 		if(this.activable()) {
 			this.getMyPlace().setTokens(0);
@@ -65,8 +66,9 @@ public class EmptierIn extends Edge {
 	
 	/**
 	 * This method check if the transition can be activated or not. 
-	 * @return
+	 * @return boolean : is the edge activable or not ?
 	 */
+	@Override
 	public boolean activable() {
 		// intermediate variables for lisibility
 		int tokens = this.getMyPlace().getTokens();
@@ -75,14 +77,7 @@ public class EmptierIn extends Edge {
 	}
 
 	/*
-	 * MAIN FOR TESTING -> tests in the Edge class
+	 * TESTING -> tests for EmptierIn in the Edge class
 	 */
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

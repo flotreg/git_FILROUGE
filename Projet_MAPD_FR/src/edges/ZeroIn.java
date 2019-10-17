@@ -3,7 +3,7 @@
  */
 package edges;
 
-import petriNetwork.Edge;
+import petriNetwork.In;
 import petriNetwork.Place;
 import petriNetwork.Transition;
 
@@ -15,12 +15,14 @@ import petriNetwork.Transition;
  * @version 1
  * @since 17/10/2019
  */
-public class ZeroIn extends Edge {
+public class ZeroIn extends In {
 
 	/*
 	 * ATTRIBUTES -> inherited from Edge
 	 */
 
+	
+	
 	/*
 	 * CONSTRUCTORS
 	 */
@@ -51,12 +53,15 @@ public class ZeroIn extends Edge {
 		super(w, p, t);
 	}
 
+	
+	
 	/*
-	 * OWN METHODS
+	 * REDEFINED METHODS
 	 */
 	/**
 	 * This method ain't do nothing for ZeroIn
 	 */
+	@Override
 	public void step() {
 	}
 
@@ -65,21 +70,17 @@ public class ZeroIn extends Edge {
 	 * For this edge, it is activated only if the number of tokens = 0.
 	 * @return
 	 */
+	@Override
 	public boolean activable() {
 		// intermediate values for clarity
 		int tokens = this.getMyPlace().getTokens();
 		return (tokens == 0) ? true : false;
 	}
 
+	
+	
 	/*
-	 * MAIN FOR TESTING -> tests in the Edge class
+	 * TESTING -> tests for ZeroIn in the Edge class
 	 */
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
