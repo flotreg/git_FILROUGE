@@ -164,11 +164,15 @@ public abstract class Edge {
 	 */
 	public static void main(String[] args) {
 		// TEST 1 : constructor without param + toString
-		System.out.println("\n TEST 1 : constructor without param + toString :");
+		System.out.println("\n // TEST 1 : constructor without param + toString :");
 		Edge eIn1 = new RegularIn();
 		System.out.println(eIn1);
 		Edge eOut1 = new RegularOut();
 		System.out.println(eOut1);
+		Edge eZIn1 = new ZeroIn();
+		System.out.println(eZIn1);
+		Edge eEIn1 = new EmptierIn();
+		System.out.println(eEIn1);
 
 		// TEST 2 : constructor with weight param + toString
 		System.out.println("\n // TEST 2 : constructor with weight param + toString :");
@@ -176,16 +180,33 @@ public abstract class Edge {
 		System.out.println(eIn2);
 		Edge eOut2 = new RegularOut(5);
 		System.out.println(eOut2);
+		Edge eZIn2 = new ZeroIn(875);
+		System.out.println(eZIn2);
+		Edge eEIn2 = new EmptierIn(349);
+		System.out.println(eEIn2);
 
 		// TEST 3 : constructor with all params + toString
 		System.out.println("\n // TEST 3 : constructor with all params + toString : ");
 		Edge eIn3 = new RegularIn(72, new Place(), new Transition());
 		System.out.println(eIn3);
+		System.out.println("	Place associated to this edge : " + eIn3.getMyPlace());
+		System.out.println("	Transition associated to this edge : " + eIn3.getMyTransition());
 		Edge eOut3 = new RegularOut(5, new Place(), new Transition());
 		System.out.println(eOut3);
+		System.out.println("	Place associated to this edge : " + eOut3.getMyPlace());
+		System.out.println("	Transition associated to this edge : " + eOut3.getMyTransition());
+		Edge eZIn3 = new ZeroIn(12, new Place(), new Transition());
+		System.out.println(eZIn3);
+		System.out.println("	Place associated to this edge : " + eZIn3.getMyPlace());
+		System.out.println("	Transition associated to this edge : " + eZIn3.getMyTransition());
+		Edge eEIn3 = new EmptierIn(38, new Place(), new Transition());
+		System.out.println(eEIn3);
+		System.out.println("	Place associated to this edge : " + eEIn3.getMyPlace());
+		System.out.println("	Transition associated to this edge : " + eEIn3.getMyTransition());
 
-		// TEST 4 : activable and empty() for In : NO
-		System.out.println("\n // TEST 4 : activable and empty() for In : NO :");
+
+		// TEST 4 : activable and step() for Regular In : NO
+		System.out.println("\n // TEST 4 : activable and step() for Regular In : NO :");
 		eIn3.setMyPlace(new Place(48));
 		System.out.println("nombre de jetons de la place : " + eIn3.getMyPlace().getTokens());
 		System.out.println("poids de la transition : " + eIn3.getWeight());
@@ -193,41 +214,59 @@ public abstract class Edge {
 		((In) eIn3).step();
 		System.out.println("résultat du empty/step : "  + eIn3.getMyPlace().getTokens());
 
-		// TEST 5 : activable and empty() for In : YES
-		System.out.println("\n // TEST 5 : activable and empty() for In : YES :");
+		// TEST 4bis : activable and step() for Regular In : YES
+		System.out.println("\n // TEST 4bis : activable and step() for Regular In : YES :");
 		eIn3.setMyPlace(new Place(198));
 		System.out.println("nombre de jetons de la place : " + eIn3.getMyPlace().getTokens());
 		System.out.println("poids de la transition : " + eIn3.getWeight());
 		System.out.println("est activable ? " + ((In) eIn3).activable());
-		System.out.println(((In) eIn3).activable());
 		((In) eIn3).step();
 		System.out.println("résultat du empty/step : " + eIn3.getMyPlace().getTokens());
 		
-		// TEST 6 : fill() for Out : 
-		System.out.println("\n // TEST 6 : fill() for Out : ");
+		// TEST 5 : step() for regular Out : 
+		System.out.println("\n // TEST 5 : step() for regular Out :  ");
 		eOut3.setMyPlace(new Place(12));
 		System.out.println("nombre de jetons de la place : " + eOut3.getMyPlace().getTokens());
 		System.out.println("poids de la transition : " + eOut3.getWeight());
 		((Out) eOut3).step();
 		System.out.println("résultat du fill/step : " + eOut3.getMyPlace().getTokens());
 		
-		// TEST 7 : empty() for EmptierIn :
-		System.out.println("\n // TEST 7 : empty() for EmptierIn :");
-		Edge eEmptierIn1 = new EmptierIn(34, new Place(72), new Transition());
-		System.out.println("nombre de jetons de la place : " + eEmptierIn1.getMyPlace().getTokens());
-		System.out.println("poids de la transition : " + eEmptierIn1.getWeight());
-		((EmptierIn) eEmptierIn1).step();
-		System.out.println("résultat du fill/step : " + eEmptierIn1.getMyPlace().getTokens());
+		// TEST 6 : activable and step() for EmptierIn : NO
+		System.out.println("\n // TEST 6 : activable and step() for EmptierIn : NO");
+		eEIn3.setMyPlace(new Place(7));
+		System.out.println("nombre de jetons de la place : " + eEIn3.getMyPlace().getTokens());
+		System.out.println("poids de la transition : " + eEIn3.getWeight());
+		System.out.println("La transition est-elle activable ? " + ((EmptierIn) eEIn3).activable());
+		((EmptierIn) eEIn3).step();
+		System.out.println("résultat du fill/step : " + eEIn3.getMyPlace().getTokens());
+		
+		// TEST 6bis : activable and step() for EmptierIn : YES
+		System.out.println("\n // TEST 6bis : activable and step() for EmptierIn : YES");
+		eEIn3.setMyPlace(new Place(72));
+		System.out.println("nombre de jetons de la place : " + eEIn3.getMyPlace().getTokens());
+		System.out.println("poids de la transition : " + eEIn3.getWeight());
+		System.out.println("La transition est-elle activable ? " + ((EmptierIn) eEIn3).activable());
+		((EmptierIn) eEIn3).step();
+		System.out.println("résultat du fill/step : " + eEIn3.getMyPlace().getTokens());
 		
 		
-		// TEST 8 : zero() for ZeroIn : 
-		System.out.println("\n // TEST 8 : zero() for ZeroIn : ");
-		Edge eZeroIn1 = new ZeroIn(22, new Place(178), new Transition());
-		System.out.println("nombre de jetons de la place : " + eZeroIn1.getMyPlace().getTokens());
-		System.out.println("poids de la transition : " + eZeroIn1.getWeight());
-		System.out.println("La transition est-elle activable ? " + ((ZeroIn) eZeroIn1).activable());
-		((ZeroIn) eZeroIn1).step();
-		System.out.println("résultat du fill/step : " + eEmptierIn1.getMyPlace().getTokens());
+		// TEST 7 : activable and step() for ZeroIn : NO
+		System.out.println("\n // TEST 7 : activable and step() for ZeroIn : NO");
+		eZIn3.setMyPlace(new Place(33));
+		System.out.println("nombre de jetons de la place : " + eZIn3.getMyPlace().getTokens());
+		System.out.println("poids de la transition : " + eZIn3.getWeight());
+		System.out.println("La transition est-elle activable ? " + ((ZeroIn) eZIn3).activable());
+		((ZeroIn) eZIn3).step();
+		System.out.println("résultat du fill/step : " + eZIn3.getMyPlace().getTokens());
+		
+		// TEST 7bis : activable and step() for ZeroIn : YES
+		System.out.println("\n // TEST 7bis : activable and step() for ZeroIn : YES ");
+		eZIn3.setMyPlace(new Place(0));
+		System.out.println("nombre de jetons de la place : " + eZIn3.getMyPlace().getTokens());
+		System.out.println("poids de la transition : " + eZIn3.getWeight());
+		System.out.println("La transition est-elle activable ? " + ((ZeroIn) eZIn3).activable());
+		((ZeroIn) eZIn3).step();
+		System.out.println("résultat du fill/step : " + eZIn3.getMyPlace().getTokens());
 		
 
 	}
