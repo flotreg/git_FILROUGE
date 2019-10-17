@@ -47,7 +47,7 @@ public abstract class Out extends Edge {
 	
 	
 	/*
-	 * OWN METHODS
+	 * ABSTRACT METHODS
 	 */
 	/**
 	 * Abstract to force children.
@@ -62,8 +62,9 @@ public abstract class Out extends Edge {
 	 * toString() redefined
 	 * adds the type of the Edge.
 	 */
+	@Override
 	public String toString() {
-		return super.toString() + "\n     Type : OUT";
+		return super.toString() + "\n      Type : Out";
 	}
 	
 

@@ -51,15 +51,21 @@ public class RegularOut extends Out {
 	 * This method fills the ending place with the number of tokens
 	 * that matches the weight of the edge. 
 	 */
+	@Override
 	public void step() {
 		getMyPlace().setTokens(getMyPlace().getTokens()+this.getWeight());
 	}
-
+	
 	/**
-	 * @param args
+	 * toString() redefined : adds the subtype
 	 */
-	public static void main(String[] args) {
-
+	@Override
+	public String toString() {
+		return super.toString() + "\n      Subtype : Regular Out";
 	}
+
+	/*
+	 * TESTING -> tests for RegularOut are in the Edge class.
+	 */
 
 }

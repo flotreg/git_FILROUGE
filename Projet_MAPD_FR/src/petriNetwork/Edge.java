@@ -136,8 +136,13 @@ public abstract class Edge {
 	}
 
 	/*
-	 * OWN METHODS
+	 * ABSTRACT METHODS
 	 */
+	/**
+	 * Abstract to force children.
+	 * Either fills or remove tokens, depending if it's In or Out. 
+	 */
+	public abstract void step();
 
 	/*
 	 * OVERRIDE METHODS
@@ -148,8 +153,7 @@ public abstract class Edge {
 	 */
 	@Override
 	public String toString() {
-		return "Edge n°" + getIdentifier() + "\n      Weight = " + getWeight() + "\n      Place = " + getMyPlace()
-				+ "\n      Transition = " ;
+		return "Edge n°" + getIdentifier() + "\n      Weight = " + getWeight();
 	}
 
 	/*

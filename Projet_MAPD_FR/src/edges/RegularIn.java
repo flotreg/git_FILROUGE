@@ -45,7 +45,16 @@ public class RegularIn extends In {
 	public RegularIn(int weight, Place p, Transition t) {
 		super(weight, p, t);
 	}
-
+	
+	/*
+	 * REDEFINED METHODS
+	 */
+	/**
+	 * This method removes the number of tokens
+	 * corresponding to the weight.
+	 * Only if the edge is activable.
+	 */
+	@Override
 	public void step() {
 		if (this.activable()) {
 			// intermediate variables for lisibility
@@ -55,19 +64,30 @@ public class RegularIn extends In {
 		}
 	}
 
+	/**
+	 * This method checks that the edge can be activated.
+	 * It is activable only if there are more tokens in the place
+	 * than the weight of the edge.
+	 * @return boolean : activable or not ?
+	 */
+	@Override
 	public boolean activable() {
 		// intermediate variables for lisibility
 		int tokens = this.getMyPlace().getTokens();
 		int weight = this.getWeight();
 		return (weight <= tokens) ? true : false;
 	}
-
+	
 	/**
-	 * @param args
+	 * toString redefined : adds the subtype.
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	@Override
+	public String toString() {
+		return super.toString() + "\n      Subtype : Regular In";
 	}
+
+	/*
+	 * TESTING -> tests for RegularIn are in the Edge class.
+	 */
 
 }

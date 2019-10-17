@@ -4,8 +4,9 @@
 package petriNetwork;
 
 /**
- * In extends Edge. It represents edges that start from place and end to
- * transition.
+ * In extends Edge. 
+ * It represents edges that start from place and end to transition.
+ * It is abstract. 
  * 
  * @author Bonjour
  * @version 1
@@ -52,9 +53,8 @@ public abstract class In extends Edge {
 	 */
 
 	/*
-	 * OWN METHODS
+	 * ABSTRACT METHODS
 	 */
-
 	/**
 	 * Abstract to force children.
 	 * Makes something with the token of the starting place.
@@ -74,8 +74,9 @@ public abstract class In extends Edge {
 	 * toString() redefined.
 	 * Adds the type of the Edge.
 	 */
+	@Override
 	public String toString() {
-		return super.toString() + "\n     Type : IN";
+		return super.toString() + "\n      Type : In";
 	}
 
 	/*
