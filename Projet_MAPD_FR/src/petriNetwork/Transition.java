@@ -36,15 +36,26 @@ public class Transition implements AddEdge{
 		this.myIns = nMyIns;
 		this.myOuts = nMyOuts; 
 	}
-	/**
+	/*
+	 * GETTERS AND SETTERS
+	 */
+	public ArrayList<Place> getMyPlaces() {
+		return myPlaces;
+	}
+	public ArrayList<In> getMyIns() {
+		return myIns;
+	}
+	public ArrayList<Out> getMyOuts() {
+		return myOuts;
+	}
+	/*
 	 * REDEFINITION
 	 */
 	public String toString() {
 		return "\n, myplaces : "
 				+myPlaces+"\n, myIns : "
 				+myIns+"\n, myOuts : "
-				+myOuts
-				+"\n ancienne méthode toString : " + super.toString();
+				+myOuts;
 	}
 	public boolean isFirable(boolean activable) {
 		boolean b = true;
@@ -64,24 +75,33 @@ public class Transition implements AddEdge{
 	 * @Override
 	 * 
 	 */
-	public void addEdge(AddEdge dest, boolean inOut, int weight) throws AddEdgeException{
-			if(!(dest instanceof Place)) {
-				throw new AddEdgeException();
-			}else{
-				this.myPlaces.add((Place)dest);
-				//check the type of the edge
-				if(inOut) {
-					this.myIns.add(new In(weight));
-				}else {
-					this.myOuts.add(new Out(weight));
-				}
+	public void addEdge(AddEdge dest, boolean inOut, int weight) throws AddEdgeException {
+		if(!(dest instanceof Place)) {
+			throw new AddEdgeException();
+		}else{
+			if(inOut) {
+				myIns.add(new In(weight,(Place)dest,this));
+			} else {
+				myOuts.add(new Out(weight, (Place)dest,this));
 			}
 		}
+		
+	}
 	
 	/*
 	 * OWN METHODS
 	 */
-	
+	public void displayEdges() {
+		System.out.println("In: ");
+		for (In in : myIns) {
+			System.out.println(in.toString());
+		}
+		System.out.println("Out: ");
+		for (Out out : myOuts) {
+			System.out.println(out.toString());
+		}
+		
+	}
 	public void fire() {
 		
 	}
@@ -91,15 +111,29 @@ public class Transition implements AddEdge{
 	 */
 	
 	public static void main(String [] args) {
-		//Test creation of transition with constructor1
+		//TEST 1 : creation of transition with constructor1
+		System.out.println("\nTEST 1 : constructor 1");
 		Transition trans = new Transition();
 		System.out.println(trans);
 		
-		//Test creation of transition with constructor2
+		//TEST 2 : creation of transition with constructor2
+		System.out.println("\nTEST2 : constuctor 2");
 		Transition trans2 = new Transition(new ArrayList<Place>(),new ArrayList<In>(), new ArrayList<Out>());
-		
-		//Test toString()
 		System.out.println(trans2);
+		System.out.println(trans2.myIns);
+		
+		//TEST 4 : AddEdge()
+		System.out.println("\nTEST3 : addEdge()");
+		try {
+			trans2.addEdge(new Place(3), true, 3);
+		} catch(AddEdgeException e) {
+			e.printStackTrace();
+		}
+		
+		for(In i : trans2.getMyIns()) {
+			System.out.println(i);
+		}
+		
 		
 
 	}

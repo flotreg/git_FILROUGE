@@ -128,6 +128,10 @@ public abstract class Edge {
 	public void setMyTransition(Transition myTransition) {
 		this.myTransition = myTransition;
 	}
+	
+	public int getIdentifier() {
+		return identifier;
+	}
 
 	/*
 	 * OWN METHODS
@@ -142,8 +146,8 @@ public abstract class Edge {
 	 */
 	@Override
 	public String toString() {
-		return "Edge n°" + identifier + "\n      Weight = " + weight + "\n      Place = " + myPlace
-				+ "\n      Transition = " + myTransition;
+		return "Edge n°" + getIdentifier() + "\n      Weight = " + getWeight() + "\n      Place = " + getMyPlace()
+				+ "\n      Transition = " ;
 	}
 
 	/*

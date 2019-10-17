@@ -83,7 +83,7 @@ public class In extends Edge {
 	 * toString() redefined adds the type of the Edge.
 	 */
 	public String toString() {
-		return super.toString() + "\n     Type : " + this.getClass().getName();
+		return super.toString() + "\n     Type : IN";
 	}
 
 	/*
