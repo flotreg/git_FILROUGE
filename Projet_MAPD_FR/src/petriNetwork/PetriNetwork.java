@@ -4,6 +4,7 @@
 package petriNetwork;
 
 import java.util.ArrayList;
+import java.util.Map;
 import edges.*;
 
 /**
@@ -12,61 +13,70 @@ import edges.*;
  */
 public class PetriNetwork {
 	//ATTRIBUTES
-	private int index;
-	private ArrayList<Place> myPlaces;
-	private ArrayList<Transition> myTransitions;
-	private ArrayList<Edge> myEdges;
+	private Map<Integer,Place > myPlaces;
+	private Map<Integer,Transition> myTransitions;
+	private Map<Integer,Edge> myEdges;
 	
 	//CONSTRUCTORS
 	public PetriNetwork() {
-		this.index = 0;
 		this.myPlaces = null;
 		this.myTransitions = null;
 		this.myEdges = null;
 	}
 	
-	public PetriNetwork(int index,ArrayList<Place> np,ArrayList<Transition> nt,ArrayList<Edge>ne) {
-		this.index = index;
+	public PetriNetwork(Map<Integer,Place> np,Map<Integer,Transition> nt,Map<Integer,Edge>ne) {
 		this.myPlaces = np;
 		this.myTransitions = nt;
 		this.myEdges = ne;
 	}
 	
 	//OWN FUNCTIONS
-	public void buildPlace() {
-		myPlaces.add(new Place());
+	public Place buildPlace(int tokens) {
+		Place place = new Place(tokens);
+		myPlaces.put(place.getIdentifier(),place);
+		return place;
 	}
 	
-	public void buildTransition() {
-		myTransitions.add(new Transition());
+	public Transition buildTransition() {
+		Transition transition = new Transition();
+		myTransitions.put(transition.getIdentifier(),transition);
+		return transition;
 	}
 	
-	public void buildEdge(EdgeTypes e,Place p,Transition t,int weight) {
+	public Edge buildEdge(EdgeTypes e,Place p,Transition t,int weight) {
 		switch(e) {
 		case RegularIn :
-			myEdges.add(new RegularIn(weight,p,t));
-			break;
+			RegularIn regularIn = new RegularIn(weight,p,t);
+			myEdges.put(regularIn.getIdentifier(),regularIn);
+			return regularIn;
 		case RegularOut :
-			myEdges.add(new RegularOut(weight,p,t));
-			break;
+			RegularOut regularOut = new RegularOut(weight,p,t);
+			myEdges.put(regularOut.getIdentifier(),regularOut);
+			return regularOut;
 		case ZeroIn :
-			myEdges.add(new ZeroIn(weight,p,t));
-			break;
+			ZeroIn zeroIn = new ZeroIn(weight,p,t);
+			myEdges.put(zeroIn.getIdentifier(),zeroIn);
+			return zeroIn;
 		case EmptierIn :
-			myEdges.add(new EmptierIn(weight,p,t));
-			break;
+			EmptierIn emptierIn = new EmptierIn(weight,p,t);
+			myEdges.put(emptierIn.getIdentifier(),emptierIn);
+			return emptierIn;
+		default :
+			RegularIn regular = new RegularIn();
+			return regular;
 		}
 	}
 		
-	public void deletePlace(int placeIndex) {
-		
+	public void deletePlace(int identifier) {
+		myPlaces.remove(identifier);
 	}
 	
-	public void deleteTransition(int transitionIndex) {
+	public void deleteTransition(int identifier) {
+		myTransitions.remove(identifier);
 	}
 	
-	public void deleteEdge(Place place,Transition transition) {
-		
+	public void deleteEdge(int identifier) {
+		myEdges.remove(identifier);
 	}
 	
 	public void step() {

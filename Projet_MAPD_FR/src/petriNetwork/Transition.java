@@ -60,6 +60,9 @@ public class Transition implements AddEdge{
 	public ArrayList<Out> getMyOuts() {
 		return myOuts;
 	}
+	public int getIdentifier() {
+		return this.identifier;
+	}
 	/*
 	 * REDEFINITION
 	 */

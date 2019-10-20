@@ -71,6 +71,10 @@ public class Place implements AddEdge {
 	public void setTokens(int tokens) {
 		this.tokens = tokens;
 	}
+	
+	public int getIdentifier() {
+		return this.identifier;
+	}
 
 	/**
 	 * addEdge redefinition
