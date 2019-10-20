@@ -90,7 +90,8 @@ public class Place implements Edgeable {
 	 * @param e
 	 */
 	@Override
-	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
+	public Edge addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
+		return null;
 	}
 	
 	/**

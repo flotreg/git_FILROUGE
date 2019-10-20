@@ -87,7 +87,7 @@ public class Transition implements Edgeable{
 	 * 
 	 */
 	@Override
-	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
+	public Edge addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
 		if(!(dest instanceof Place)) {
 			throw new AddEdgeException();
 		} else {
@@ -96,22 +96,24 @@ public class Transition implements Edgeable{
 					RegularIn regularIn = new RegularIn(weight,(Place)dest,this);
 					myIns.put(regularIn.getIdentifier(),regularIn);
 					myPlaces.put(((Place)dest).getIdentifier(), ((Place)dest));
-					break;
+					return regularIn;
 				case RegularOut:
 					RegularOut regularOut = new RegularOut(weight,(Place)dest,this);
 					myOuts.put(regularOut.getIdentifier(),regularOut);
 					myPlaces.put(((Place)dest).getIdentifier(), ((Place)dest));
-					break;
+					return regularOut;
 				case ZeroIn:
 					ZeroIn zeroIn = new ZeroIn(weight,(Place)dest,this);
 					myIns.put(zeroIn.getIdentifier(),zeroIn);
 					myPlaces.put(((Place)dest).getIdentifier(), ((Place)dest));
-					break;
+					return zeroIn;
 				case EmptierIn:
 					EmptierIn emptierIn = new EmptierIn(weight,(Place)dest,this);
 					myIns.put(emptierIn.getIdentifier(),emptierIn);
 					myPlaces.put(((Place)dest).getIdentifier(), ((Place)dest));
-					break;
+					return emptierIn;
+				default : 
+					return null;
 				}
 		}
 		

@@ -2,6 +2,7 @@ package interfaces;
 
 import exceptions.AddEdgeException;
 import edges.EdgeTypes;
+import petriNetwork.*;
 
 /**
  * This interface makes it possible to add edges. 
@@ -19,7 +20,7 @@ public interface Edgeable {
 	 * @param weight : the weight of the edge
 	 * @throws AddEdgeException
 	 */
-	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException;
+	public Edge addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException;
 	
 	/**
 	 * This method removes an edge based on its identifier
