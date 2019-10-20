@@ -84,6 +84,7 @@ public final class PetriNetwork {
 		} catch(AddEdgeException exception) {
 			exception.printStackTrace();
 		}
+		//commit
 		
 	}
 /*
