@@ -1,6 +1,8 @@
 package petriNetwork;
 
 import exceptions.AddEdgeException;
+
+import java.util.HashMap;
 import java.util.Map;
 
 import edges.EdgeTypes;
@@ -21,8 +23,8 @@ public class Transition implements AddEdge{
 	private static int counter = 0;
 	private int identifier;
 	private Map<Integer,Place> myPlaces;
-	private Map<Integer,In> myIns;
 	private Map<Integer,Out> myOuts;
+	private Map<Integer, In> myIns;
 
 	/** 
 	 * CONSTRUCTORS
@@ -30,9 +32,9 @@ public class Transition implements AddEdge{
 	public Transition() {
 		counter += 1;
 		this.identifier = counter;
-		this.myPlaces = null;
-		this.myIns = null;
-		this.myOuts = null;
+		this.myPlaces = new HashMap<Integer, Place>();
+		this.myIns = new HashMap<Integer, In>();
+		this.myOuts = new HashMap<Integer, Out>();
 	}
 	/**
 	 * Constructor with every parameters
@@ -112,6 +114,8 @@ public class Transition implements AddEdge{
 				switch (e) {
 				case RegularIn:
 					RegularIn regularIn = new RegularIn(weight,(Place)dest,this);
+					System.out.println("TEST");
+					System.out.println(regularIn.getIdentifier());
 					myIns.put(regularIn.getIdentifier(),regularIn);
 					break;
 				case RegularOut:
@@ -162,6 +166,8 @@ public class Transition implements AddEdge{
 		System.out.println("\nTEST 1 : constructor 1");
 		Transition trans = new Transition();
 		System.out.println(trans);
+		System.out.println(trans.getMyIns());
+		
 		/*
 		//TEST 2 : creation of transition with constructor2
 		System.out.println("\nTEST2 : constuctor 2");
