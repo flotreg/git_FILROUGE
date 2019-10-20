@@ -2,7 +2,6 @@ package petriNetwork;
 
 import exceptions.AddEdgeException;
 import java.util.Map;
-import java.util.ArrayList;
 
 import edges.EdgeTypes;
 import edges.RegularIn;
@@ -88,7 +87,7 @@ public class Transition implements AddEdge{
 		return b;
 	}*/
 	
-	public boolean isFirable(boolean activable) {
+	public boolean isFirable() {
 		boolean b = true;
 		for(Map.Entry<Integer,In> in : myIns.entrySet()) {
 			if (in.getValue().activable() == true && b == true) {
@@ -147,7 +146,11 @@ public class Transition implements AddEdge{
 		
 	}
 	public void fire() {
-		
+		if (isFirable() == true) {
+			for(Map.Entry<Integer,Out> outs : myOuts.entrySet()) {
+				outs.getValue().step();
+			}
+		}
 	}
 	
 	/*
@@ -159,23 +162,24 @@ public class Transition implements AddEdge{
 		System.out.println("\nTEST 1 : constructor 1");
 		Transition trans = new Transition();
 		System.out.println(trans);
-		
+		/*
 		//TEST 2 : creation of transition with constructor2
 		System.out.println("\nTEST2 : constuctor 2");
-		Transition trans2 = new Transition(new ArrayList<Place>(),new ArrayList<In>(), new ArrayList<Out>());
+		Place place = new Place();
+		In in = new RegularIn ();
+		Out out = new RegularOut();
+		Transition trans2 = new Transition();
 		System.out.println(trans2);
 		System.out.println(trans2.myIns);
+		*/
 		
 		//TEST 4 : AddEdge()
 		System.out.println("\nTEST3 : addEdge()");
+		Place place = new Place(3);
 		try {
-			trans2.addEdge(new Place(3), EdgeTypes.RegularIn, 3);
+			trans.addEdge(place, EdgeTypes.RegularIn, 3);
 		} catch(AddEdgeException e) {
 			e.printStackTrace();
-		}
-		
-		for(In i : trans2.getMyIns()) {
-			System.out.println(i);
 		}
 		
 		
