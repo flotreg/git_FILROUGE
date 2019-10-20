@@ -21,7 +21,7 @@ public interface Edgeable {
 	 */
 	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException;
 	
-	public void deleteEdge();
+	public void deleteEdge(int identifier);
 
 
 }

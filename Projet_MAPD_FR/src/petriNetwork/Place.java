@@ -101,6 +101,13 @@ public class Place implements Edgeable {
 		}
 
 	}
+	
+	/**
+	 * Redefinition of deleteEdge
+	 */
+	@Override
+	public void deleteEdge(int identifier) {
+	}
 
 	/**
 	 * @param args
@@ -140,5 +147,7 @@ public class Place implements Edgeable {
 		
 
 	}
+
+
 
 }

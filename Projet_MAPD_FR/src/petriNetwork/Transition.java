@@ -114,25 +114,35 @@ public class Transition implements Edgeable{
 				switch (e) {
 				case RegularIn:
 					RegularIn regularIn = new RegularIn(weight,(Place)dest,this);
-					System.out.println("TEST");
-					System.out.println(regularIn.getIdentifier());
 					myIns.put(regularIn.getIdentifier(),regularIn);
+					myPlaces.put(((Place)dest).getIdentifier(), ((Place)dest));
 					break;
 				case RegularOut:
 					RegularOut regularOut = new RegularOut(weight,(Place)dest,this);
 					myOuts.put(regularOut.getIdentifier(),regularOut);
+					myPlaces.put(((Place)dest).getIdentifier(), ((Place)dest));
 					break;
 				case ZeroIn:
 					ZeroIn zeroIn = new ZeroIn(weight,(Place)dest,this);
 					myIns.put(zeroIn.getIdentifier(),zeroIn);
+					myPlaces.put(((Place)dest).getIdentifier(), ((Place)dest));
 					break;
 				case EmptierIn:
 					EmptierIn emptierIn = new EmptierIn(weight,(Place)dest,this);
 					myIns.put(emptierIn.getIdentifier(),emptierIn);
+					myPlaces.put(((Place)dest).getIdentifier(), ((Place)dest));
 					break;
 				}
 		}
 		
+	}
+	
+	/**
+	 * Removes edge
+	 */
+	@Override
+	public void deleteEdge(int identifier) {
+		this.myIns.remove(identifier);
 	}
 	
 	/*
@@ -144,13 +154,18 @@ public class Transition implements Edgeable{
 			System.out.println(in.getValue().toString());
 		}
 		System.out.println("Out: ");
-		for(Map.Entry<Integer,In> out : myIns.entrySet()) {
+		for(Map.Entry<Integer,Out> out : myOuts.entrySet()) {
 			System.out.println(out.getValue().toString());
 		}
 		
 	}
 	public void fire() {
 		if (isFirable() == true) {
+			// step the Ins
+			for(Map.Entry<Integer, In> ins : myIns.entrySet()) {
+				ins.getValue().step();
+			}
+			// step the Outs
 			for(Map.Entry<Integer,Out> outs : myOuts.entrySet()) {
 				outs.getValue().step();
 			}
@@ -164,32 +179,64 @@ public class Transition implements Edgeable{
 	public static void main(String [] args) {
 		//TEST 1 : creation of transition with constructor1
 		System.out.println("\nTEST 1 : constructor 1");
-		Transition trans = new Transition();
-		System.out.println(trans);
-		System.out.println(trans.getMyIns());
+		Transition trans1 = new Transition();
+		System.out.println(trans1);
 		
-		/*
-		//TEST 2 : creation of transition with constructor2
-		System.out.println("\nTEST2 : constuctor 2");
-		Place place = new Place();
-		In in = new RegularIn ();
-		Out out = new RegularOut();
-		Transition trans2 = new Transition();
-		System.out.println(trans2);
-		System.out.println(trans2.myIns);
-		*/
-		
-		//TEST 4 : AddEdge()
-		System.out.println("\nTEST3 : addEdge()");
-		Place place = new Place(3);
+		// TEST 2 : add some edges
+		System.out.println("\nTEST2 : add some edges");
+		Place place1 = new Place(4);
+		Place place2 = new Place (10);
+		Place place3 = new Place(0);
+		Place place4 = new Place(1);
 		try {
-			trans.addEdge(place, EdgeTypes.RegularIn, 3);
+			trans1.addEdge(place1, EdgeTypes.RegularIn, 3);
 		} catch(AddEdgeException e) {
 			e.printStackTrace();
 		}
+		try {
+			trans1.addEdge(place2, EdgeTypes.EmptierIn, 0);
+		} catch (AddEdgeException e) {
+			e.printStackTrace();
+		}
+		try {
+			trans1.addEdge(place3, EdgeTypes.ZeroIn, 0);
+		} catch (AddEdgeException e) {
+			e.printStackTrace();
+		}
+		try {
+			trans1.addEdge(place4, EdgeTypes.RegularOut, 200);
+		} catch (AddEdgeException e) {
+			e.printStackTrace();
+		}
+		System.out.println("The edges : ");
+		trans1.displayEdges();
 		
+		System.out.println("The places : ");
+		for(Map.Entry<Integer, Place> p : trans1.myPlaces.entrySet()) {
+			System.out.println(p.getValue());
+		}
+		
+		// TEST 3 : firable
+		System.out.println("\n // TEST 3 : firable");
+		System.out.println("Is the transition fireable ?" + trans1.isFirable());
+		
+		
+		// TEST 4 : fire the transition
+		System.out.println("\n // TEST 4 : fire the transition");
+		trans1.fire();
+		System.out.println("The edges : ");
+		trans1.displayEdges();
+		
+		System.out.println("The places : ");
+		for(Map.Entry<Integer, Place> p : trans1.myPlaces.entrySet()) {
+			System.out.println(p.getValue());
+		}
+
+
+	
 		
 
 	}
+
 	
 }
