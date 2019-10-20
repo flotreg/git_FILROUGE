@@ -1,6 +1,7 @@
 package petriNetwork;
 
 import exceptions.AddEdgeException;
+import java.util.Map;
 import java.util.ArrayList;
 
 import edges.EdgeTypes;
@@ -20,9 +21,9 @@ public class Transition implements AddEdge{
 	 */
 	private static int counter = 0;
 	private int identifier;
-	private ArrayList<Place> myPlaces;
-	private ArrayList<In> myIns;
-	private ArrayList<Out> myOuts;
+	private Map<Integer,Place> myPlaces;
+	private Map<Integer,In> myIns;
+	private Map<Integer,Out> myOuts;
 
 	/** 
 	 * CONSTRUCTORS
@@ -41,7 +42,7 @@ public class Transition implements AddEdge{
 	 * @param nMyIns
 	 * @param nMyOuts
 	 */
-	public Transition(ArrayList<Place> nMyPlaces,ArrayList<In> nMyIns,ArrayList<Out> nMyOuts) {
+	public Transition(Map<Integer,Place> nMyPlaces, Map<Integer,In> nMyIns,Map<Integer,Out> nMyOuts) {
 		counter += 1;
 		this.identifier = counter;
 		this.myPlaces = nMyPlaces;
@@ -51,13 +52,13 @@ public class Transition implements AddEdge{
 	/*
 	 * GETTERS AND SETTERS
 	 */
-	public ArrayList<Place> getMyPlaces() {
+	public Map<Integer,Place> getMyPlaces() {
 		return myPlaces;
 	}
-	public ArrayList<In> getMyIns() {
+	public Map<Integer,In> getMyIns() {
 		return myIns;
 	}
-	public ArrayList<Out> getMyOuts() {
+	public Map<Integer,Out> getMyOuts() {
 		return myOuts;
 	}
 	public int getIdentifier() {
@@ -75,7 +76,7 @@ public class Transition implements AddEdge{
 	}
 	
 	
-	public boolean isFirable(boolean activable) {
+	/*public boolean isFirable(boolean activable) {
 		boolean b = true;
 		for (In in : myIns) {
 			if (in.activable() == true && b == true) {
@@ -85,7 +86,19 @@ public class Transition implements AddEdge{
 			}
 		}
 		return b;
-	}
+	}*/
+	
+	public boolean isFirable(boolean activable) {
+		boolean b = true;
+		for(Map.Entry<Integer,In> in : myIns.entrySet()) {
+			if (in.getValue().activable() == true && b == true) {
+				b = true;
+			} else {
+				b = false;
+			}
+		}
+		return b;
+		}
 
 	/**
 	 * Add edges
@@ -99,16 +112,20 @@ public class Transition implements AddEdge{
 		} else {
 				switch (e) {
 				case RegularIn:
-					myIns.add(new RegularIn(weight,(Place)dest,this));
+					RegularIn regularIn = new RegularIn(weight,(Place)dest,this);
+					myIns.put(regularIn.getIdentifier(),regularIn);
 					break;
 				case RegularOut:
-					myOuts.add(new RegularOut(weight,(Place)dest,this));
+					RegularOut regularOut = new RegularOut(weight,(Place)dest,this);
+					myOuts.put(regularOut.getIdentifier(),regularOut);
 					break;
 				case ZeroIn:
-					myIns.add(new ZeroIn(weight,(Place)dest,this));
+					ZeroIn zeroIn = new ZeroIn(weight,(Place)dest,this);
+					myIns.put(zeroIn.getIdentifier(),zeroIn);
 					break;
 				case EmptierIn:
-					myIns.add(new EmptierIn(weight,(Place)dest,this));
+					EmptierIn emptierIn = new EmptierIn(weight,(Place)dest,this);
+					myIns.put(emptierIn.getIdentifier(),emptierIn);
 					break;
 				}
 		}
@@ -120,12 +137,12 @@ public class Transition implements AddEdge{
 	 */
 	public void displayEdges() {
 		System.out.println("In: ");
-		for (In in : myIns) {
-			System.out.println(in.toString());
+		for(Map.Entry<Integer,In> in : myIns.entrySet()) {
+			System.out.println(in.getValue().toString());
 		}
 		System.out.println("Out: ");
-		for (Out out : myOuts) {
-			System.out.println(out.toString());
+		for(Map.Entry<Integer,In> out : myIns.entrySet()) {
+			System.out.println(out.getValue().toString());
 		}
 		
 	}
