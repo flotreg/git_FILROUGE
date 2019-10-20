@@ -98,16 +98,16 @@ public final class PetriNetwork {
 		}
 	}
 
+	/**
+	 * Deletes the place from :
+	 * 		the list of the petrinet
+	 * 		the list of the transition
+	 * Also deletes the edge linked to the place. 
+	 * @param identifier of the place to delete
+	 */
 	public void deletePlace(int identifier) {
 		// remove the place from the list of the petri net.
 		myPlaces.remove(identifier);
-
-		// removes the place from the edge.
-		for (Map.Entry<Integer, Edge> e : myEdges.entrySet()) {
-			if (e.getValue().getMyPlace().getIdentifier() == identifier) {
-				e.getValue().setMyPlace(null);
-			}
-		}
 
 		// removes the place from the list of the transitions.
 		// iterate over the transitions of the petri network
@@ -118,10 +118,35 @@ public final class PetriNetwork {
 				t.getValue().getMyPlaces().remove(identifier);
 			}
 		}
+		
+		// removes the edges linked to this place
+		for (Map.Entry<Integer, Edge> e : myEdges.entrySet()) {
+			if (e.getValue().getMyPlace().getIdentifier() == identifier) {
+				deleteEdge(e.getValue().getIdentifier());
+			}
+		}
+		
+//		// removes the place from the edge.
+//		for (Map.Entry<Integer, Edge> e : myEdges.entrySet()) {
+//			if (e.getValue().getMyPlace().getIdentifier() == identifier) {
+//				e.getValue().setMyPlace(null);
+//			}
+//		}
 	}
 
 	public void deleteTransition(int identifier) {
+		// remove from the list of the petrinet
 		myTransitions.remove(identifier);
+		
+		// delete the edges linked to this transition
+		for (Map.Entry<Integer, Edge> e : myEdges.entrySet()) {
+			if (e.getValue().getMyTransition().getIdentifier() == identifier) {
+				deleteEdge(e.getValue().getIdentifier());
+			}
+		}
+		
+		// removes from the edge
+		
 	}
 
 	public void deleteEdge(int identifier) {

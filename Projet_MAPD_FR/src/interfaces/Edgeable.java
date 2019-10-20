@@ -10,7 +10,7 @@ import edges.EdgeTypes;
  * @since 17/10/2019
  *
  */
-public interface AddEdge {
+public interface Edgeable {
 	
 	/**
 	 * This method adds an edge between the caller (this) and a destination (dest)
@@ -19,7 +19,9 @@ public interface AddEdge {
 	 * @param weight : the weight of the edge
 	 * @throws AddEdgeException
 	 */
-	public void addEdge(AddEdge dest, EdgeTypes e, int weight) throws AddEdgeException;
+	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException;
+	
+	public void deleteEdge();
 
 
 }

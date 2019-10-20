@@ -4,7 +4,7 @@
 package petriNetwork;
 
 import exceptions.AddEdgeException;
-import interfaces.AddEdge;
+import interfaces.Edgeable;
 import edges.*;
 
 /**
@@ -13,7 +13,7 @@ import edges.*;
  * @author Bonjour
  *
  */
-public class Place implements AddEdge {
+public class Place implements Edgeable {
 
 	/*
 	 * ATTRIBUTES
@@ -81,7 +81,7 @@ public class Place implements AddEdge {
 	 * 
 	 */
 	@Override
-	public void addEdge(AddEdge dest, EdgeTypes e, int weight) throws AddEdgeException {
+	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
 		if (!(dest instanceof Transition)) {
 			throw new AddEdgeException();
 		} else {

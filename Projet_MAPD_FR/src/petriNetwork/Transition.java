@@ -10,12 +10,12 @@ import edges.RegularIn;
 import edges.RegularOut;
 import edges.ZeroIn;
 import edges.EmptierIn;
-import interfaces.AddEdge;
+import interfaces.Edgeable;
 
 /** 
  * Here the class Transition. This class fires the transitions.
  */
-public class Transition implements AddEdge{
+public class Transition implements Edgeable{
 	
 	/*
 	 * ATTRIBUTES
@@ -107,7 +107,7 @@ public class Transition implements AddEdge{
 	 * @Override
 	 * 
 	 */
-	public void addEdge(AddEdge dest, EdgeTypes e, int weight) throws AddEdgeException {
+	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
 		if(!(dest instanceof Place)) {
 			throw new AddEdgeException();
 		} else {
