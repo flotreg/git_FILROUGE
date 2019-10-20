@@ -21,6 +21,10 @@ public interface Edgeable {
 	 */
 	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException;
 	
+	/**
+	 * This method removes an edge based on its identifier
+	 * @param identifier
+	 */
 	public void deleteEdge(int identifier);
 
 

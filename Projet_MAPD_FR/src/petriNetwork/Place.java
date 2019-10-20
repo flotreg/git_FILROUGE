@@ -51,13 +51,9 @@ public class Place implements Edgeable {
 		this.tokens = tokens;
 	}
 
-	/**
-	 * Redefinition of the toString() method
+	/*
+	 * GETTERS AND SETTERS
 	 */
-	public String toString() {
-		return "Place n° " + identifier + ". Tokens : " +tokens;
-	}
-
 	/**
 	 * @return the tokens
 	 */
@@ -76,39 +72,40 @@ public class Place implements Edgeable {
 		return this.identifier;
 	}
 
+	/*
+	 * REDEFINED METHODS
+	 */
 	/**
-	 * addEdge redefinition
-	 * 
+	 * Redefinition of the toString() method
 	 */
 	@Override
-	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
-		if (!(dest instanceof Transition)) {
-			throw new AddEdgeException();
-		} else {
-			switch (e) {
-			case RegularIn:
-				new RegularIn(weight, this, (Transition) dest);
-				break;
-			case RegularOut:
-				new RegularOut(weight, this, (Transition) dest);
-				break;
-			case ZeroIn:
-				break;
-			case EmptierIn:
-				break;
-			}
-
-		}
-
+	public String toString() {
+		return "Place n° " + identifier + ". Tokens : " +tokens;
 	}
 	
 	/**
-	 * Redefinition of deleteEdge
+	 * addEdge redefinition : not used right now (the Petri uses only the addEdge() from the Transition)
+	 * But it might be useful in the future. 
+	 * @param dest
+	 * @param e
+	 */
+	@Override
+	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
+	}
+	
+	/**
+	 * Redefinition of deleteEdge : not used right now (the Place does not know its edges)
+	 * But might be useful in the future. 
 	 */
 	@Override
 	public void deleteEdge(int identifier) {
 	}
 
+	
+	
+	/*
+	 * MAIN FOR TESTING
+	 */
 	/**
 	 * @param args
 	 */
