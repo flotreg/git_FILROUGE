@@ -5,6 +5,7 @@ package petriNetwork;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
 import edges.*;
 
 /**
@@ -19,9 +20,9 @@ public final class PetriNetwork {
 
 	// CONSTRUCTORS
 	private PetriNetwork() {
-		this.myPlaces = null;
-		this.myTransitions = null;
-		this.myEdges = null;
+		this.myPlaces = new HashMap<Integer,Place>();
+		this.myTransitions = new HashMap<Integer,Transition>();
+		this.myEdges = new HashMap<Integer,Edge>();
 	}
 
 	private PetriNetwork(Map<Integer, Place> np, Map<Integer, Transition> nt, Map<Integer, Edge> ne) {
@@ -154,11 +155,17 @@ public final class PetriNetwork {
 	}
 
 	public void step() {
-
+		for(Map.Entry<Integer,Transition> transition : myTransitions.entrySet()) {
+			transition.getValue().fire();
+		}
 	}
 
 	public void stepUntilEnd() {
-
+		for(Map.Entry<Integer,Transition> transition : myTransitions.entrySet()) {
+			while(transition.getValue().isFirable()) {
+				transition.getValue().fire();
+			}
+		}
 	}
 
 	// MAIN
@@ -166,6 +173,33 @@ public final class PetriNetwork {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		//TEST 1 CONSTRUCTORS
+		System.out.println("\nCONSTRUCTOR1");
+		PetriNetwork p1 = new PetriNetwork();
+		System.out.println(p1);
+		System.out.println("\nCONSTRUCTOR2");
+		HashMap hp = new HashMap<Integer,Place>();
+		HashMap ht = new HashMap<Integer,Transition>();
+		HashMap he = new HashMap<Integer,Edge>();
+		PetriNetwork p2 = new PetriNetwork(hp,ht,he);
+		System.out.println(p2);
+		//TEST 2 BUILDERS
+		System.out.println("\nPLACE BUILDER");
+		Place pl1 = p1.buildPlace(8);
+		Place pl2 = p1.buildPlace(1);
+		System.out.println("Mes Places : "+p1.myPlaces);
+		System.out.println("\nTRANSITION BUILDER");
+		Transition t = p1.buildTransition();
+		System.out.println("Mes Transitions : "+p1.myTransitions);
+		System.out.println("\nEDGE BUILDER");
+		Edge e1 = p1.buildEdge(EdgeTypes.RegularIn, pl1, t, 2);
+		Edge e2 = p1.buildEdge(EdgeTypes.RegularOut, pl2, t, 5);
+		System.out.println(""he);
+		//TEST STEP
+		p1.step();
+		p1.stepUntilEnd();
+		
+		
 	}
 
 }
