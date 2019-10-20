@@ -11,23 +11,52 @@ import edges.*;
  * @author Bonjour
  * This main class manages all the network
  */
-public class PetriNetwork {
+public final class PetriNetwork {
 	//ATTRIBUTES
 	private Map<Integer,Place > myPlaces;
 	private Map<Integer,Transition> myTransitions;
 	private Map<Integer,Edge> myEdges;
+	private static PetriNetwork uniqueInstance;
 	
 	//CONSTRUCTORS
-	public PetriNetwork() {
+	private PetriNetwork() {
 		this.myPlaces = null;
 		this.myTransitions = null;
 		this.myEdges = null;
 	}
 	
-	public PetriNetwork(Map<Integer,Place> np,Map<Integer,Transition> nt,Map<Integer,Edge>ne) {
+	private PetriNetwork(Map<Integer,Place> np,Map<Integer,Transition> nt,Map<Integer,Edge>ne) {
 		this.myPlaces = np;
 		this.myTransitions = nt;
 		this.myEdges = ne;
+	}
+	
+	// GETTERS OF THE SINGLETON
+	/**
+	 * getter of the singleton : uses the constructor without parameters
+	 * Needs to build the all petri network objects afterwards.
+	 * @return the unique Instance of the PetriNetwork without anything
+	 */
+	public static PetriNetwork getInstance() {
+		if(uniqueInstance == null) {
+			uniqueInstance = new PetriNetwork();
+		}
+		return uniqueInstance;
+	}
+	
+	/**
+	 * getter of the singleton : uses the constructor with parameters
+	 * Some petri network objects can be created with this.
+	 * @param np
+	 * @param nt
+	 * @param ne
+	 * @return the unique Instance of the PetriNetwork with places, edge and transitions
+	 */
+	public static PetriNetwork getInstance(Map<Integer,Place> np,Map<Integer,Transition> nt,Map<Integer,Edge>ne) {
+		if(uniqueInstance == null) {
+			uniqueInstance = new PetriNetwork(np, nt, ne);
+		}
+		return uniqueInstance;
 	}
 	
 	//OWN FUNCTIONS
@@ -95,24 +124,6 @@ public class PetriNetwork {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		//TEST : addition of an edge
-		Transition trans = new Transition();
-		System.out.println(trans.isFirable());
-
-		Place place1 = new Place();
-		System.out.println(place1.toString());
-		
-		
-		try {
-			trans.addEdge(place1, , 274);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
-		
-
 	}
 
 }

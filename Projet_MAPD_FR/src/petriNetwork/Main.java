@@ -6,11 +6,16 @@ public class Main {
 	
 	public static void main(String[]args) {
 		
-		//TEST : Out.fill() method (not over)
-		//TEST 2 : creation of transition with constructor2
-		System.out.println("\nTEST2 : constuctor 2");
-		Transition trans2 = new Transition(new ArrayList<Place>(),new ArrayList<In>(), new ArrayList<Out>());
-		System.out.println(trans2);
+		// Instanciation of the petri network (singleton pattern)
+		PetriNetwork pn = PetriNetwork.getInstance();
+		System.out.println(pn.toString());
+		
+		PetriNetwork pn2 = PetriNetwork.getInstance();
+		System.out.println(pn2);
+		
+		System.out.println(PetriNetwork.getInstance());
+		System.out.println(PetriNetwork.getInstance());
+
 
 	}
 }
