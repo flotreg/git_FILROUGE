@@ -26,8 +26,12 @@ public class Transition implements Edgeable{
 	private Map<Integer,Out> myOuts;
 	private Map<Integer, In> myIns;
 
-	/** 
+	/*
 	 * CONSTRUCTORS
+	 */
+	/**
+	 * Constructor without parameter,
+	 * Empty hashmaps are created.
 	 */
 	public Transition() {
 		counter += 1;
@@ -77,36 +81,12 @@ public class Transition implements Edgeable{
 	}
 	
 	
-	/*public boolean isFirable(boolean activable) {
-		boolean b = true;
-		for (In in : myIns) {
-			if (in.activable() == true && b == true) {
-				b = true;
-			} else {
-				b = false;
-			}
-		}
-		return b;
-	}*/
-	
-	public boolean isFirable() {
-		boolean b = true;
-		for(Map.Entry<Integer,In> in : myIns.entrySet()) {
-			if (in.getValue().activable() == true && b == true) {
-				b = true;
-			} else {
-				b = false;
-			}
-		}
-		return b;
-		}
-
 	/**
 	 * Add edges
 	 * depends on the edge type, the weight
-	 * @Override
 	 * 
 	 */
+	@Override
 	public void addEdge(Edgeable dest, EdgeTypes e, int weight) throws AddEdgeException {
 		if(!(dest instanceof Place)) {
 			throw new AddEdgeException();
@@ -145,8 +125,29 @@ public class Transition implements Edgeable{
 		this.myIns.remove(identifier);
 	}
 	
+
 	/*
 	 * OWN METHODS
+	 */
+	/**
+	 * Checks if the transition is firable, it uses the activable() method from edge
+	 * to know if every linked edge is activable
+	 * @return boolean : is fireable or not
+	 */
+	public boolean isFirable() {
+		boolean b = true;
+		for(Map.Entry<Integer,In> in : myIns.entrySet()) {
+			if (in.getValue().activable() == true && b == true) {
+				b = true;
+			} else {
+				b = false;
+			}
+		}
+		return b;
+		}
+
+	/**
+	 * Display the edges linked to the transition. 
 	 */
 	public void displayEdges() {
 		System.out.println("In: ");
@@ -157,8 +158,11 @@ public class Transition implements Edgeable{
 		for(Map.Entry<Integer,Out> out : myOuts.entrySet()) {
 			System.out.println(out.getValue().toString());
 		}
-		
 	}
+	
+	/**
+	 * Fire the transition, if it is fireable
+	 */
 	public void fire() {
 		if (isFirable() == true) {
 			// step the Ins
@@ -172,10 +176,11 @@ public class Transition implements Edgeable{
 		}
 	}
 	
+	
+	
 	/*
 	 * MAIN FOR TESTING
 	 */
-	
 	public static void main(String [] args) {
 		//TEST 1 : creation of transition with constructor1
 		System.out.println("\nTEST 1 : constructor 1");
