@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import edges.*;
+import exceptions.AddEdgeException;
+import interfaces.Edgeable;
 
 /**
  * @author Bonjour This main class manages all the network
@@ -74,12 +76,23 @@ public final class PetriNetwork {
 		myTransitions.put(transition.getIdentifier(), transition);
 		return transition;
 	}
-
+	
+	public void buildEdge(Transition transition, Edgeable dest, EdgeTypes e, int weight) {
+		int key = transition.getIdentifier();
+		try {
+		myEdges.put(myTransitions.get(key).addEdge(dest, e, weight).getIdentifier(), myTransitions.get(key).addEdge(dest, e, weight));
+		} catch(AddEdgeException exception) {
+			exception.printStackTrace();
+		}
+		
+	}
+/*
 	public Edge buildEdge(EdgeTypes e, Place p, Transition t, int weight) {
 		switch (e) {
 		case RegularIn:
 			RegularIn regularIn = new RegularIn(weight, p, t);
 			myEdges.put(regularIn.getIdentifier(), regularIn);
+			myEdges.get(regularIn.getValue().setMyPlace(p);
 			return regularIn;
 		case RegularOut:
 			RegularOut regularOut = new RegularOut(weight, p, t);
@@ -98,6 +111,7 @@ public final class PetriNetwork {
 			return regular;
 		}
 	}
+	*/
 
 	/**
 	 * Deletes the place from :
@@ -193,7 +207,7 @@ public final class PetriNetwork {
 		System.out.println("\nTEST EDGE BUILDER");
 		Edge e1 = p1.buildEdge(EdgeTypes.RegularIn, pl1, t, 2);
 		Edge e2 = p1.buildEdge(EdgeTypes.RegularOut, pl2, t, 5);
-		System.out.println("Mes Edges : "+he);
+		System.out.println("Mes Edges : "+p1.myEdges);
 		
 		//TEST STEP
 		System.out.println("\nTEST STEP");
