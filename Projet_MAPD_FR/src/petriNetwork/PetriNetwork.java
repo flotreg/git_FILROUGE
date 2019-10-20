@@ -64,6 +64,30 @@ public final class PetriNetwork {
 		return uniqueInstance;
 	}
 
+	public Map<Integer, Place> getMyPlaces() {
+		return myPlaces;
+	}
+
+	public void setMyPlaces(Map<Integer, Place> myPlaces) {
+		this.myPlaces = myPlaces;
+	}
+
+	public Map<Integer, Transition> getMyTransitions() {
+		return myTransitions;
+	}
+
+	public void setMyTransitions(Map<Integer, Transition> myTransitions) {
+		this.myTransitions = myTransitions;
+	}
+
+	public Map<Integer, Edge> getMyEdges() {
+		return myEdges;
+	}
+
+	public void setMyEdges(Map<Integer, Edge> myEdges) {
+		this.myEdges = myEdges;
+	}
+
 	// OWN FUNCTIONS
 	public Place buildPlace(int tokens) {
 		Place place = new Place(tokens);
