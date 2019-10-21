@@ -205,25 +205,27 @@ public final class PetriNetwork {
 		}
 
 	/**
-	 * fires all the transition until there are no more activable transitions
+	 * check the transition and return true until there are no more activable transitions
+	 */
+	
+	public boolean continueToStep() {
+		for (Map.Entry<Integer, Transition> t : myTransitions.entrySet()) {
+			if (t.getValue().isFirable() == true) {
+				return true;
+			}
+		}
+		return false;
+	}
+	/*
+	 * Fire the transition and return true until there are no more activable transitions
 	 */
 	public void stepUntilEnd() {
-		boolean b = true;
-		while (b == true) {
-			for (Map.Entry<Integer, Transition> t : myTransitions.entrySet()) {
-				if (t.getValue().isFirable() || b==true) {
-					b = true;
-				} else {
-					b = false;
-				}
-			}
+		while(continueToStep()==true) {
 			for (Map.Entry<Integer, Transition> t1 : myTransitions.entrySet()) {
 				if (t1.getValue().isFirable()) {
 					t1.getValue().fire();
 				}
-
 			}
-
 		}
 	}
 	

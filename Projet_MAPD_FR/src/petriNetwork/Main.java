@@ -18,7 +18,7 @@ public class Main {
 		Place place1 = pn.buildPlace(10);
 		Place place2 = pn.buildPlace(5);
 		Place place3 = pn.buildPlace(8);
-		Place place4 = pn.buildPlace(1);
+		Place place4 = pn.buildPlace(11);
 		Place place5 = pn.buildPlace(0);
 		System.out.println(pn.getMyPlaces());
 
@@ -29,8 +29,8 @@ public class Main {
 
 		// edges
 		Edge e1 = pn.buildEdge(trans1, place1, EdgeTypes.RegularIn, 3);
-		Edge e2 = pn.buildEdge(trans1, place2, EdgeTypes.ZeroIn, 0);
-		Edge e3 = pn.buildEdge(trans1, place3, EdgeTypes.RegularOut, 22);
+		Edge e2 = pn.buildEdge(trans1, place2, EdgeTypes.RegularIn, 2);
+		Edge e3 = pn.buildEdge(trans1, place3, EdgeTypes.RegularOut, 5);
 		Edge e4 = pn.buildEdge(trans1, place5, EdgeTypes.RegularOut, 9);
 		Edge e5 = pn.buildEdge(trans2, place4, EdgeTypes.EmptierIn, 0);
 		Edge e6 = pn.buildEdge(trans2, place5, EdgeTypes.RegularOut, 7);
@@ -45,7 +45,7 @@ public class Main {
 
 		// fire another transition
 		System.out.println("Is transition 2 fireable ? " + trans2.isFirable());
-		pn.step(trans2);
+		trans2.fire();
 
 		// display the network after the fire()
 		System.out.println("My place : "+pn.getMyPlaces());
@@ -55,7 +55,7 @@ public class Main {
 		System.out.println("My edges : "+pn.getMyEdges());
 		
 		//remove some transition
-		pn.deleteTransition(1);
+		pn.deleteTransition(2);
 		System.out.println("My transitions"+pn.getMyTransitions());
 
 		//remove some place 
