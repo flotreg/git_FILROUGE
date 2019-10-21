@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 import edges.*;
 import exceptions.AddEdgeException;
+import java.util.concurrent.ConcurrentHashMap;
 import interfaces.Edgeable;
 
 /**
@@ -22,9 +23,9 @@ public final class PetriNetwork {
 
 	// CONSTRUCTORS
 	private PetriNetwork() {
-		this.myPlaces = new HashMap<Integer,Place>();
-		this.myTransitions = new HashMap<Integer,Transition>();
-		this.myEdges = new HashMap<Integer,Edge>();
+		this.myPlaces = new ConcurrentHashMap<Integer,Place>();
+		this.myTransitions = new ConcurrentHashMap<Integer,Transition>();
+		this.myEdges = new ConcurrentHashMap<Integer,Edge>();
 	}
 
 	private PetriNetwork(Map<Integer, Place> np, Map<Integer, Transition> nt, Map<Integer, Edge> ne) {
@@ -207,12 +208,25 @@ public final class PetriNetwork {
 	 * fires all the transition until there are no more activable transitions
 	 */
 	public void stepUntilEnd() {
-		for(Transition transition : myTransitions.values()) {
-			if(transition.isFirable()) {
-				transition.fire();
+		boolean b = true;
+		while (b == true) {
+			for (Map.Entry<Integer, Transition> t : myTransitions.entrySet()) {
+				if (t.getValue().isFirable() || b==true) {
+					b = true;
+				} else {
+					b = false;
+				}
 			}
+			for (Map.Entry<Integer, Transition> t1 : myTransitions.entrySet()) {
+				if (t1.getValue().isFirable()) {
+					t1.getValue().fire();
+				}
+
+			}
+
 		}
 	}
+	
 
 	// MAIN
 	/**
@@ -239,8 +253,6 @@ public final class PetriNetwork {
 		Transition t = p1.buildTransition();
 		System.out.println("Mes Transitions : "+p1.myTransitions);
 		System.out.println("\nTEST EDGE BUILDER");
-		Edge e1 = p1.buildEdge(EdgeTypes.RegularIn, pl1, t, 2);
-		Edge e2 = p1.buildEdge(EdgeTypes.RegularOut, pl2, t, 5);
 		System.out.println("Mes Edges : "+p1.myEdges);
 		
 		//TEST STEP

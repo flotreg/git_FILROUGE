@@ -15,9 +15,9 @@ public class Main {
 
 		// Build some elements for the PetriNetwork
 		// places
-		Place place1 = pn.buildPlace(4);
-		Place place2 = pn.buildPlace(0);
-		Place place3 = pn.buildPlace(10);
+		Place place1 = pn.buildPlace(10);
+		Place place2 = pn.buildPlace(5);
+		Place place3 = pn.buildPlace(8);
 		Place place4 = pn.buildPlace(1);
 		Place place5 = pn.buildPlace(0);
 		System.out.println(pn.getMyPlaces());
@@ -41,53 +41,32 @@ public class Main {
 		trans1.fire();
 
 		// display the network after the fire()
-		System.out.println(pn.getMyPlaces());
+		System.out.println("My place : "+pn.getMyPlaces());
 
 		// fire another transition
-		System.out.println("Is transition 2 fireable ?" + trans2.isFirable());
-		trans2.fire();
+		System.out.println("Is transition 2 fireable ? " + trans2.isFirable());
+		pn.step(trans2);
 
 		// display the network after the fire()
-		System.out.println(pn.getMyPlaces());
+		System.out.println("My place : "+pn.getMyPlaces());
 		
 		// removes some edge
+		pn.deleteEdge(4);
+		System.out.println("My edges : "+pn.getMyEdges());
 		
-//		
-//		
-//		// fire a transition
-//		
-//		
-//		//TEST 1 CONSTRUCTORS
-//		System.out.println("\nTEST CONSTRUCTOR1");
-//		System.out.println("\nTEST CONSTRUCTOR2");
-//		HashMap hp = new HashMap<Integer, Place>();
-//		HashMap ht = new HashMap<Integer, Transition>();
-//		HashMap he = new HashMap<Integer, Edge>();
-//		PetriNetwork pn2 = PetriNetwork.getInstance(hp, ht, he);
-//		System.out.println(pn2);
-//
-//		// TEST 2 BUILDERS
-//		System.out.println("\nTEST PLACE BUILDER");
-//		Place pl1 = pn.buildPlace(8);
-//		Place pl2 = pn.buildPlace(1);
-//		System.out.println("Mes Places : " + pn.myPlaces);
-//		System.out.println("\nTEST TRANSITION BUILDER");
-//		Transition t = pn2.buildTransition();
-//		System.out.println("Mes Transitions : " + pn2.myTransitions);
-//		System.out.println("\nTEST EDGE BUILDER");
-//		Edge e1 = pn2.buildEdge(EdgeTypes.RegularIn, pl1, t, 2);
-//		Edge e2 = pn2.buildEdge(EdgeTypes.RegularOut, pl2, t, 5);
-//		System.out.println("Mes Edges : " + pn2.myEdges);
-//
-//		// TEST STEP
-//		System.out.println("\nTEST STEP");
-//		System.out.println(pn2.myPlaces);
-//		System.out.println("------FIRE------");
-//		pn2.step(t);
-//		System.out.println("my place :" + pn2.myPlaces);
-//		System.out.println("\nTEST STEP UNTIL END");
-//		pn2.stepUntilEnd();
-//		System.out.println(pn2.myPlaces);
+		//remove some transition
+		pn.deleteTransition(1);
+		System.out.println("My transitions"+pn.getMyTransitions());
+
+		//remove some place 
+		pn.deletePlace(4);
+		System.out.println("My places : "+pn.getMyPlaces());
+		
+		//Fire all
+		System.out.println("My places : "+pn.getMyPlaces());
+		pn.stepUntilEnd();
+		System.out.println("My places : "+pn.getMyPlaces());
+		
 
 	}
 }
