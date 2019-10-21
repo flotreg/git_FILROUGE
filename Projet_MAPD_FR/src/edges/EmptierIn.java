@@ -82,7 +82,7 @@ public class EmptierIn extends In {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() +  "\n      Subtype : Emptier In";
+		return super.toString() +  "\n      Subtype : Emptier In\n";
 	}
 
 	/*

@@ -121,14 +121,16 @@ public final class PetriNetwork {
 	 * @param e
 	 * @param weight
 	 */
-	public void buildEdge(Transition transition, Edgeable dest, EdgeTypes e, int weight) {
+	public Edge buildEdge(Transition transition, Edgeable dest, EdgeTypes e, int weight) {
 		int key = transition.getIdentifier();
+		Edge edge = null;
 		try {
-			 Edge edge = myTransitions.get(key).addEdge(dest, e, weight);
+			 edge = myTransitions.get(key).addEdge(dest, e, weight);
 			 myEdges.put(edge.getIdentifier(), edge);
 		} catch(AddEdgeException exception) {
 			exception.printStackTrace();
 		}		
+		return edge;
 	}
 
 

@@ -153,7 +153,7 @@ public abstract class Edge {
 	 */
 	@Override
 	public String toString() {
-		return "Edge n°" + getIdentifier() + "\n      Weight = " + getWeight();
+		return "Edge n°" + getIdentifier() + "\n      Weight = " + getWeight() ;
 	}
 
 	/*

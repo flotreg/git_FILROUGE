@@ -61,7 +61,7 @@ public class RegularOut extends Out {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + "\n      Subtype : Regular Out";
+		return super.toString() + "\n      Subtype : Regular Out\n";
 	}
 
 	/*

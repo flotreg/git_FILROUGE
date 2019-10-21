@@ -83,7 +83,7 @@ public class ZeroIn extends In {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() +  "\n      Subtype : Zero In";
+		return super.toString() +  "\n      Subtype : Zero In\n";
 	}
 
 	

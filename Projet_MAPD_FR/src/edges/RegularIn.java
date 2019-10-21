@@ -83,7 +83,7 @@ public class RegularIn extends In {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + "\n      Subtype : Regular In";
+		return super.toString() + "\n      Subtype : Regular In\n";
 	}
 
 	/*

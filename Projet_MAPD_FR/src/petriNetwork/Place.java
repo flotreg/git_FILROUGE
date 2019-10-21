@@ -80,7 +80,7 @@ public class Place implements Edgeable {
 	 */
 	@Override
 	public String toString() {
-		return "Place n° " + identifier + ". Tokens : " +tokens;
+		return "Place n° " + identifier + ". Tokens : " +tokens + "\n";
 	}
 	
 	/**

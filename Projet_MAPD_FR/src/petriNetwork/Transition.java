@@ -77,7 +77,7 @@ public class Transition implements Edgeable{
 	 */
 	@Override
 	public String toString() {
-		return "Transition n° : " + this.identifier;
+		return "Transition n° : " + this.identifier + "\n";
 	}
 	
 	
