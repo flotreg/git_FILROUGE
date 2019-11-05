@@ -15,7 +15,7 @@ public class PlaceAdapter extends AbstractPlace {
 	/*
 	 * ATTRIBUTES
 	 */
-	public Place ourPlace = null; 
+	protected Place ourPlace; 
 
 	/*
 	 * CONSTRUCTOR

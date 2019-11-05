@@ -48,6 +48,9 @@ public class ArcAdapter extends AbstractArc{
 		case RegularOut:
 			this.ourArc = new RegularOut();
 			break;
+		case ZeroIn:
+			this.ourArc = new ZeroIn();
+			break;
 		default:
 			break;
 		}

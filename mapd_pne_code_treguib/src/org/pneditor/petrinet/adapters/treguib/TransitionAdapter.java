@@ -13,7 +13,7 @@ import org.pneditor.petrinet.models.treguib.petriNetwork.Transition;
  */
 public class TransitionAdapter extends AbstractTransition {
 	
-	public Transition ourTransition;
+	protected Transition ourTransition;
 
 	public TransitionAdapter(String label) {
 		super(label);
