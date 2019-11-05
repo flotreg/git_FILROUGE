@@ -26,9 +26,9 @@ public class PetriNetAdapter extends PetriNetInterface {
 	 * ATTRIBUTES
 	 */
 	PetriNetwork pn = PetriNetwork.getInstance();
-	PlaceAdapter pa = null;
+	PlaceAdapter pa;
 	TransitionAdapter ta;
-	ArcAdapter aa = null;
+	ArcAdapter aa;
 
 	/*
 	 * OVERRIDED METHODS
@@ -135,23 +135,49 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println(p.ta.getClass());
 		System.out.println(p.ta.ourTransition.toString());
 		
-		// DEBUG
-		System.out.println("DEBUG");
-		System.out.println((p.pa instanceof AbstractPlace));
-		System.out.println((p.ta instanceof AbstractTransition));
 		
 		// TEST 3 : build an IN edge between the two
-		System.out.println("\n TEST 3 : build an edge between the two");
+		System.out.println("\n TEST 3 : build an IN edge between the two");
 		try {
 			p.addRegularArc(p.pa, p.ta );
-			System.out.println(p.aa.getSource());
 		} catch (UnimplementedCaseException e) {
 			e.printStackTrace();
 		}
 		try {
 			p.aa.setMultiplicity(18);
 		} catch (ResetArcMultiplicityException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(p.aa.ourArc.toString());
+		
+		// TEST 4 : build an OUT edge between the two
+		System.out.println("\n TEST 4 : build an OUT edge between the two");
+		try {
+			p.addRegularArc(p.ta, p.pa );
+		} catch (UnimplementedCaseException e) {
+			e.printStackTrace();
+		}
+		try {
+			p.aa.setMultiplicity(9);
+		} catch (ResetArcMultiplicityException e) {
+			e.printStackTrace();
+		}
+		System.out.println(p.aa.ourArc.toString());
+		
+		// TEST 5 : get the source of the Arc
+		System.out.println("\n TEST 5 : get the source of the Arc");
+		System.out.println(p.aa.getSource());
+		
+		// TEST 6 : build a INHIBITORY arc
+		System.out.println("\n TEST 6 : build a INHIBITORY arc");
+		try {
+			p.addInhibitoryArc(p.pa, p.ta);
+		} catch (UnimplementedCaseException e) {
+			e.printStackTrace();
+		}
+		try {
+			p.aa.setMultiplicity(9);
+		} catch (ResetArcMultiplicityException e) {
 			e.printStackTrace();
 		}
 		System.out.println(p.aa.ourArc.toString());
