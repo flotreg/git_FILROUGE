@@ -4,16 +4,20 @@
 package org.pneditor.petrinet.adapters.treguib;
 
 import org.pneditor.petrinet.AbstractTransition;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Transition;
 
 /**
+ * 
  * @author f18guibo
  *
  */
 public class TransitionAdapter extends AbstractTransition {
+	
+	public Transition ourTransition;
 
 	public TransitionAdapter(String label) {
 		super(label);
-		// TODO Auto-generated constructor stub
+		ourTransition = new Transition();
 	}
 
 	/**

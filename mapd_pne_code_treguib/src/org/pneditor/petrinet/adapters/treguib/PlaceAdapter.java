@@ -1,26 +1,39 @@
-/**
- * 
- */
 package org.pneditor.petrinet.adapters.treguib;
 
 import org.pneditor.petrinet.AbstractPlace;
 import org.pneditor.petrinet.models.treguib.petriNetwork.Place;
 
 /**
+ * Adapter for the Place object.
+ * Interacts with AbstractPlace in PNE code
+ * Mainly linked to Place in our code
  * @author f18guibo
  *
  */
 public class PlaceAdapter extends AbstractPlace {
 
-	private Place ourPlace = null; 
+	/*
+	 * ATTRIBUTES
+	 */
+	public Place ourPlace = null; 
 
-	
+	/*
+	 * CONSTRUCTOR
+	 */
+	/**
+	 * Constructor with Label.
+	 * ID is already defined in PNE code. 
+	 * @param label
+	 */
 	public PlaceAdapter(String label) {
 		super(label);
 		this.ourPlace = new Place();
 	}
+	/*
+	 * OVERRIDED METHODS
+	 */
 	/**
-	 * Add one token
+	 * Add one token to the Place
 	 */
 	@Override
 	public void addToken() {
@@ -29,7 +42,7 @@ public class PlaceAdapter extends AbstractPlace {
 	}
 
 	/**
-	 * Remove one token
+	 * Remove one token from the Place
 	 */
 	@Override
 	public void removeToken() {
@@ -48,7 +61,7 @@ public class PlaceAdapter extends AbstractPlace {
 	}
 
 	/**
-	 * set the number of tokens using our place
+	 * sets the number of tokens using our place
 	 * @param tokens
 	 */
 	@Override
