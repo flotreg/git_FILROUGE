@@ -84,11 +84,19 @@ public class ArcAdapter extends AbstractArc{
 		return null;
 	}
 
+	/**
+	 * Checks if the arc is emptier in
+	 * TO DO : change instanceof with EdgeTypes
+	 */
 	@Override
 	public boolean isReset() {
 		return (ourArc instanceof EmptierIn);
 	}
 
+	/**
+	 * Checks if the arc is regular
+	 * TO DO : change instanceof with EdgeTypes
+	 */
 	@Override
 	public boolean isRegular() {
 		if(ourArc instanceof RegularIn || ourArc instanceof RegularOut) {
@@ -96,7 +104,10 @@ public class ArcAdapter extends AbstractArc{
 		}
 		return false;
 	}
-
+	/**
+	 * Checks if the arc is zero in
+	 * TO DO : change instanceof with EdgeTypes
+	 */
 	@Override
 	public boolean isInhibitory() {
 		return (ourArc instanceof ZeroIn);
