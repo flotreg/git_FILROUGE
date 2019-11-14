@@ -89,9 +89,15 @@ public class PetriNetAdapter extends PetriNetInterface {
 		return aa;
 	}
 
+	/**
+	 * This removes a place from the Place List
+	 * in our petrinetwork
+	 * @param place
+	 */
 	@Override
 	public void removePlace(AbstractPlace place) {
-		// TODO Auto-generated method stub
+		int myPlaceId = this.pa.ourPlace.getIdentifier();
+		this.pn.deleteEdge(myPlaceId);
 		
 	}
 
