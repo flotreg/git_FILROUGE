@@ -85,7 +85,8 @@ public class PetriNetAdapter extends PetriNetInterface {
 	public AbstractArc addResetArc(AbstractPlace place, AbstractTransition transition)
 			throws UnimplementedCaseException {
 		// TODO Auto-generated method stub
-		return null;
+		this.aa = new ArcAdapter(EdgeTypes.EmptierIn);
+		return aa;
 	}
 
 	@Override
@@ -182,7 +183,19 @@ public class PetriNetAdapter extends PetriNetInterface {
 		}
 		System.out.println(p.aa.ourArc.toString());
 		
-		
+		//TEST 7 : build an ADDRESETARC
+		System.out.println("\nTEST 7 : build a ADDRESETARC");
+		try {
+			p.addResetArc(p.pa, p.ta);
+		} catch (UnimplementedCaseException e) {
+			e.printStackTrace();
+		}
+		try {
+			p.aa.setMultiplicity(5);
+		} catch (ResetArcMultiplicityException e) {
+			e.printStackTrace();
+		}
+		System.out.println(p.aa.ourArc.toString());
 	}
 
 }
