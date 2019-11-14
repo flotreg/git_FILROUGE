@@ -70,9 +70,17 @@ public class ArcAdapter extends AbstractArc{
 		return null;
 	}
 
+	/**
+	 * If IN -> destination = transition
+	 * If OUT -> destination = place
+	 */
 	@Override
 	public AbstractNode getDestination() {
-		// TODO Auto-generated method stub
+		if(this.ourArc instanceof In) {
+			return new TransitionAdapter("");
+		}else if(this.ourArc instanceof Out) {
+			return new PlaceAdapter("");
+		}
 		return null;
 	}
 
