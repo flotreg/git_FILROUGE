@@ -51,6 +51,8 @@ public class ArcAdapter extends AbstractArc{
 		case ZeroIn:
 			this.ourArc = new ZeroIn();
 			break;
+		case EmptierIn:
+			this.ourArc = new EmptierIn();
 		default:
 			break;
 		}

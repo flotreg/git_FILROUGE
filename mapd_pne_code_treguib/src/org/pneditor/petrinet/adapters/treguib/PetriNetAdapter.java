@@ -184,7 +184,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println(p.aa.ourArc.toString());
 		
 		//TEST 7 : build an ADDRESETARC
-		System.out.println("\nTEST 7 : build a ADDRESETARC");
+		System.out.println("\nTEST 7 : build an ADDRESETARC");
 		try {
 			p.addResetArc(p.pa, p.ta);
 		} catch (UnimplementedCaseException e) {
