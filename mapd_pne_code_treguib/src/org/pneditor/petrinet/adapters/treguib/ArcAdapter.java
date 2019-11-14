@@ -86,8 +86,7 @@ public class ArcAdapter extends AbstractArc{
 
 	@Override
 	public boolean isReset() {
-		// TODO Auto-generated method stub
-		return false;
+		return (ourArc instanceof EmptierIn);
 	}
 
 	@Override
