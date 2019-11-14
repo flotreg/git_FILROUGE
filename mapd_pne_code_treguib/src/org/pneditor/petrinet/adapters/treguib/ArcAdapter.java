@@ -70,18 +70,33 @@ public class ArcAdapter extends AbstractArc{
 		return null;
 	}
 
+	/**
+	 * If IN -> destination = transition
+	 * If OUT -> destination = place
+	 */
 	@Override
 	public AbstractNode getDestination() {
-		// TODO Auto-generated method stub
+		if(this.ourArc instanceof In) {
+			return new TransitionAdapter("");
+		}else if(this.ourArc instanceof Out) {
+			return new PlaceAdapter("");
+		}
 		return null;
 	}
 
+	/**
+	 * Checks if the arc is emptier in
+	 * TO DO : change instanceof with EdgeTypes
+	 */
 	@Override
 	public boolean isReset() {
-		// TODO Auto-generated method stub
-		return false;
+		return (ourArc instanceof EmptierIn);
 	}
 
+	/**
+	 * Checks if the arc is regular
+	 * TO DO : change instanceof with EdgeTypes
+	 */
 	@Override
 	public boolean isRegular() {
 		if(ourArc instanceof RegularIn || ourArc instanceof RegularOut) {
@@ -89,11 +104,13 @@ public class ArcAdapter extends AbstractArc{
 		}
 		return false;
 	}
-
+	/**
+	 * Checks if the arc is zero in
+	 * TO DO : change instanceof with EdgeTypes
+	 */
 	@Override
 	public boolean isInhibitory() {
-		// TODO Auto-generated method stub
-		return false;
+		return (ourArc instanceof ZeroIn);
 	}
 
 	/**
