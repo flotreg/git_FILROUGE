@@ -21,6 +21,9 @@ public class ArcAdapter extends AbstractArc{
 	 */
 	protected Edge ourArc;
 	protected EdgeTypes ourType;
+	protected PlaceAdapter itsPlaceAdapter;
+	protected TransitionAdapter itsTransitionAdapter;
+	protected PetriNetwork ourPetri = PetriNetwork.getInstance();
 	
 	/*
 	 * CONSTRUCTORS
@@ -79,9 +82,13 @@ public class ArcAdapter extends AbstractArc{
 	@Override
 	public AbstractNode getDestination() {
 		if(this.ourArc instanceof In) {
-			return new TransitionAdapter("");
+			System.out.println("DEBUG : " + this.ourArc.getMyTransition().toString());
+			itsTransitionAdapter.ourTransition = this.ourArc.getMyTransition();
+			return itsTransitionAdapter;
+			
 		}else if(this.ourArc instanceof Out) {
-			return new PlaceAdapter("");
+			itsPlaceAdapter.ourPlace = this.ourArc.getMyPlace();
+			return itsPlaceAdapter;
 		}
 		return null;
 	}
