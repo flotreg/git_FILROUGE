@@ -67,8 +67,11 @@ public class PetriNetAdapter extends PetriNetInterface {
 		if (source instanceof AbstractPlace) {
 			PlaceAdapter pa = (PlaceAdapter) source;
 			TransitionAdapter ta = (TransitionAdapter) destination;
-			this.ourPetri.buildEdge(ta.ourTransition, pa.ourPlace, EdgeTypes.RegularIn, 1);
 			aa = new ArcAdapter(EdgeTypes.RegularIn);
+			aa.ourArc = this.ourPetri.buildEdge(ta.ourTransition, pa.ourPlace, EdgeTypes.RegularIn, 1);
+			// add placeAdapter and transitionAdapter to our ArcAdapter
+			aa.itsPlaceAdapter = pa;
+			aa.itsTransitionAdapter = ta;
 			// add place and transition to our arc
 			aa.ourArc.setMyPlace(pa.ourPlace);
 			aa.ourArc.setMyTransition(ta.ourTransition);
@@ -76,8 +79,8 @@ public class PetriNetAdapter extends PetriNetInterface {
 		} else if (source instanceof AbstractTransition) {
 			PlaceAdapter pa = (PlaceAdapter) destination;
 			TransitionAdapter ta = (TransitionAdapter) source;
-			this.ourPetri.buildEdge(ta.ourTransition, pa.ourPlace, EdgeTypes.RegularOut, 1);
 			aa = new ArcAdapter(EdgeTypes.RegularOut);
+			aa.ourArc = this.ourPetri.buildEdge(ta.ourTransition, pa.ourPlace, EdgeTypes.RegularOut, 1);
 			// add place and transition to our arc
 			aa.ourArc.setMyPlace(pa.ourPlace);
 			aa.ourArc.setMyTransition(ta.ourTransition);
@@ -143,42 +146,69 @@ public class PetriNetAdapter extends PetriNetInterface {
 
 	public static void main(String[] args) {
 
-		// TEST 0 : build a place
-		System.out.println("\nTEST 0 : build a place");
+		// TEST 0 : build a PetrinetAdapter
+		System.out.println("\nTEST 0 : build a PetriNetAdapter");
 		PetriNetAdapter pna = new PetriNetAdapter();
+		System.out.println(pna);
+
+		// TEST 1 : build a place
+		System.out.println("\nTEST 1 : build a place");
 		AbstractPlace absPlace1 = pna.addAbstractPlace();
-		System.out.println("Méthode du PNE : " + pna.getPlaces());
-		System.out.println("Notre méthode : " + pna.ourPetri.getMyPlaces());
-		for (Integer key : pna.ourPetri.getMyPlaces().keySet()) {
-			if (key == 1)
-				pna.ourPetri.getMyPlaces().get(key).setTokens(9);
-		}
+		System.out.println(absPlace1);
+		System.out.println("Liste des places du PNE : " + pna.getPlaces());
+		System.out.println("Liste des places de notre code : " + pna.ourPetri.getMyPlaces());
 
-		for (AbstractPlace ap : pna.getPlaces()) {
-			ap.setTokens(9);
-			System.out.println(ap.getTokens());
-		}
-		System.out.println("Notre méthode : " + pna.ourPetri.getMyPlaces());
-		System.out.println("Clefs de la méthode PNE : " + pna.getPlaces());
+		// TEST 1bis : build a second place
+		System.out.println("\nTEST 1bis : build a second place");
+		AbstractPlace absPlace2 = pna.addAbstractPlace();
+		System.out.println(absPlace2);
+		System.out.println("Liste des places du PNE : " + pna.getPlaces());
+		System.out.println("Liste des places de notre code : " + pna.ourPetri.getMyPlaces());
 
-		// TEST 1 : build transition
+		// TEST 2 : build transition
+		System.out.println("\nTEST 2 : build transition");
+		AbstractTransition absTrans1 = pna.addAbstractTransition();
+		System.out.println(absTrans1);
+		System.out.println("Liste des transitions du PNE : " + pna.getTransitions());
+		System.out.println("Liste des transitions de notre code : " + pna.ourPetri.getMyTransitions());
 
-		System.out.println("Créer une transition");
-		AbstractTransition absTr1 = pna.addAbstractTransition();
-		System.out.println("Méthode du PNE : " + pna.getTransitions());
-		System.out.println("Notre méthode : " + pna.ourPetri.getMyTransitions());
-
-		// TEST 2 : build arc :
-		System.out.println("\nTEST 0 : build an arc");
+		// TEST 3 : build an IN arc :
+		System.out.println("\nTEST 3 : build an IN arc");
+		AbstractArc absArcIn1 = null;
 		try {
-			pna.addRegArc(absPlace1, absTr1);
+			absArcIn1 = pna.addRegArc(absPlace1, absTrans1);
 		} catch (UnimplementedCaseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Notre méthode : " + pna.ourPetri.getMyEdges());
+		System.out.println(absArcIn1);
 
-		System.out.println("Clefs de la méthode PNE : " + pna.getConnectedArcs(absTr1));
+		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
+		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
+
+		// TEST 3bis : build an OUT arc :
+		System.out.println("\nTEST 3bis : build an OUT arc");
+		AbstractArc absArcOut1 = null;
+		try {
+			absArcOut1 = pna.addRegArc(absTrans1, absPlace2);
+		} catch (UnimplementedCaseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(absArcOut1);
+
+		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
+		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
+		
+		
+		// SET TRANSITION TBD
+//		for (Integer key : pna.ourPetri.getMyPlaces().keySet()) {
+//			if (key == 1)
+//				pna.ourPetri.getMyPlaces().get(key).setTokens(9);
+//		}
+//
+//		for (AbstractPlace ap : pna.getPlaces()) {
+//			ap.setTokens(9);
+//			System.out.println(ap.getTokens());
+//		}
 
 //		// TEST 1 : build a place
 //		System.out.println("\nTEST 1 : build a place");

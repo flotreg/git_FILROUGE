@@ -23,7 +23,6 @@ public class ArcAdapter extends AbstractArc{
 	protected EdgeTypes ourType;
 	protected PlaceAdapter itsPlaceAdapter;
 	protected TransitionAdapter itsTransitionAdapter;
-	protected PetriNetwork ourPetri = PetriNetwork.getInstance();
 	
 	/*
 	 * CONSTRUCTORS
