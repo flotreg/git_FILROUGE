@@ -69,6 +69,7 @@ public class ArcAdapter extends AbstractArc{
 		if(this.ourArc instanceof In) {
 			itsPlaceAdapter.ourPlace = this.ourArc.getMyPlace();
 			return itsPlaceAdapter;
+			
 		} else if (this.ourArc instanceof Out) {
 			itsTransitionAdapter.ourTransition = this.ourArc.getMyTransition();
 			return itsTransitionAdapter;
