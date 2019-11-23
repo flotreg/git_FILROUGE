@@ -195,9 +195,38 @@ public class PetriNetAdapter extends PetriNetInterface {
 		}
 		System.out.println(absArcOut1);
 
-		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
+//		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
 		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
 		
+		// TEST 4 : set and get multiplicity for Arc IN
+		System.out.println("\nTEST 4 : set and get multiplicity for Arc IN :");
+			// set
+		try {
+			absArcIn1.setMultiplicity(13);
+		} catch (ResetArcMultiplicityException e) {
+			e.printStackTrace();
+		}
+			// get
+		try {
+			System.out.println("Multiplicité : " + absArcIn1.getMultiplicity());
+		} catch (ResetArcMultiplicityException e) {
+			e.printStackTrace();
+		}
+		
+		// TEST 4bis : set and get multiplicity for Arc OUT
+		System.out.println("\nTEST 4bis : set and get multiplicity for Arc OUT");
+			// set
+		try {
+			absArcOut1.setMultiplicity(7);
+		} catch (ResetArcMultiplicityException e) {
+			e.printStackTrace();
+		}
+			// get
+		try {
+			System.out.println("Multiplicité : " + absArcOut1.getMultiplicity());
+		} catch (ResetArcMultiplicityException e) {
+			e.printStackTrace();
+		}
 		
 		// SET TRANSITION TBD
 //		for (Integer key : pna.ourPetri.getMyPlaces().keySet()) {
