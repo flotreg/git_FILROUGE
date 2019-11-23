@@ -66,10 +66,13 @@ public class ArcAdapter extends AbstractArc{
 	 */
 	@Override
 	public AbstractNode getSource() {
-		if(ourArc instanceof In) {
-			return new PlaceAdapter("");
-		} else if (ourArc instanceof Out) {
-			return new TransitionAdapter("");
+		if(this.ourArc instanceof In) {
+			itsPlaceAdapter.ourPlace = this.ourArc.getMyPlace();
+			return itsPlaceAdapter;
+			
+		} else if (this.ourArc instanceof Out) {
+			itsTransitionAdapter.ourTransition = this.ourArc.getMyTransition();
+			return itsTransitionAdapter;
 		}
 		return null;
 	}
@@ -81,7 +84,6 @@ public class ArcAdapter extends AbstractArc{
 	@Override
 	public AbstractNode getDestination() {
 		if(this.ourArc instanceof In) {
-			System.out.println("DEBUG : " + this.ourArc.getMyTransition().toString());
 			itsTransitionAdapter.ourTransition = this.ourArc.getMyTransition();
 			return itsTransitionAdapter;
 			
