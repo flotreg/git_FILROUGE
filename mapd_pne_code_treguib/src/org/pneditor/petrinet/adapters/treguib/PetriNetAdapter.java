@@ -198,7 +198,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 		}
 		System.out.println(absArcOut1);
 
-//		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
+		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
 		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
 		
 		// TEST 4 : set and get multiplicity for Arc IN
