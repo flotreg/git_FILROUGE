@@ -81,6 +81,9 @@ public class PetriNetAdapter extends PetriNetInterface {
 			TransitionAdapter ta = (TransitionAdapter) source;
 			aa = new ArcAdapter(EdgeTypes.RegularOut);
 			aa.ourArc = this.ourPetri.buildEdge(ta.ourTransition, pa.ourPlace, EdgeTypes.RegularOut, 1);
+			// add placeAdapter and transitionAdapter to our ArcAdapter
+			aa.itsPlaceAdapter = pa;
+			aa.itsTransitionAdapter = ta;
 			// add place and transition to our arc
 			aa.ourArc.setMyPlace(pa.ourPlace);
 			aa.ourArc.setMyTransition(ta.ourTransition);
