@@ -246,6 +246,18 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("Nombre de jetons : " +absPlace2.getTokens());
 		
 		
+		// TEST 6 : fire()
+		System.out.println("\nTEST 6 : fire()");
+		System.out.println("BEFORE : Nombre de jetons Place1 : " + absPlace1.getTokens());
+		System.out.println("BEFORE : Nombre de jetons Place2 : " + absPlace2.getTokens());
+		try {
+			pna.fire(absTrans1);
+		} catch (ResetArcMultiplicityException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("AFTER : Nombre de jetons Place1 : " + absPlace1.getTokens());
+		System.out.println("AFTER : Nombre de jetons Place2 : " + absPlace2.getTokens());
 		
 		// SET TRANSITION TBD
 //		for (Integer key : pna.ourPetri.getMyPlaces().keySet()) {
