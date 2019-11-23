@@ -100,7 +100,10 @@ public class ArcAdapter extends AbstractArc{
 	 */
 	@Override
 	public boolean isReset() {
-		return (ourArc instanceof EmptierIn);
+		if (ourArc instanceof EmptierIn) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -120,7 +123,10 @@ public class ArcAdapter extends AbstractArc{
 	 */
 	@Override
 	public boolean isInhibitory() {
-		return (ourArc instanceof ZeroIn);
+		if (ourArc instanceof ZeroIn) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

@@ -99,15 +99,37 @@ public class PetriNetAdapter extends PetriNetInterface {
 	@Override
 	public AbstractArc addInhibitoryArc(AbstractPlace place, AbstractTransition transition)
 			throws UnimplementedCaseException {
-		this.aa = new ArcAdapter(EdgeTypes.ZeroIn);
+		ArcAdapter aa = null;
+		PlaceAdapter pa = (PlaceAdapter) place;
+		TransitionAdapter ta = (TransitionAdapter) transition;
+		aa = new ArcAdapter(EdgeTypes.ZeroIn);
+		aa.ourArc = this.ourPetri.buildEdge(ta.ourTransition, pa.ourPlace, EdgeTypes.ZeroIn, 1);
+		// add placeAdapter and transitionAdapter to our ArcAdapter
+		aa.itsPlaceAdapter = pa;
+		aa.itsTransitionAdapter = ta;
+		// add place and transition to our arc
+		aa.ourArc.setMyPlace(pa.ourPlace);
+		aa.ourArc.setMyTransition(ta.ourTransition);
 		return aa;
 	}
-
+	/**
+	 * this returns an ArcAdapter with type Emptier In
+	 * @return Arc Adapter with a type EmptierIn
 	@Override
+	*/
 	public AbstractArc addResetArc(AbstractPlace place, AbstractTransition transition)
 			throws UnimplementedCaseException {
-		// TODO Auto-generated method stub
-		this.aa = new ArcAdapter(EdgeTypes.EmptierIn);
+		ArcAdapter aa = null;
+		PlaceAdapter pa = (PlaceAdapter) place;
+		TransitionAdapter ta = (TransitionAdapter) transition;
+		aa = new ArcAdapter(EdgeTypes.EmptierIn);
+		aa.ourArc = this.ourPetri.buildEdge(ta.ourTransition, pa.ourPlace, EdgeTypes.EmptierIn, 1);
+		// add placeAdapter and transitionAdapter to our ArcAdapter
+		aa.itsPlaceAdapter = pa;
+		aa.itsTransitionAdapter = ta;
+		// add place and transition to our arc
+		aa.ourArc.setMyPlace(pa.ourPlace);
+		aa.ourArc.setMyTransition(ta.ourTransition);
 		return aa;
 	}
 
@@ -154,6 +176,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 		PetriNetAdapter pna = new PetriNetAdapter();
 		System.out.println(pna);
 
+		
 		// TEST 1 : build a place
 		System.out.println("\nTEST 1 : build a place");
 		AbstractPlace absPlace1 = pna.addAbstractPlace();
@@ -161,6 +184,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("Liste des places du PNE : " + pna.getPlaces());
 		System.out.println("Liste des places de notre code : " + pna.ourPetri.getMyPlaces());
 
+		
 		// TEST 1bis : build a second place
 		System.out.println("\nTEST 1bis : build a second place");
 		AbstractPlace absPlace2 = pna.addAbstractPlace();
@@ -168,6 +192,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("Liste des places du PNE : " + pna.getPlaces());
 		System.out.println("Liste des places de notre code : " + pna.ourPetri.getMyPlaces());
 
+		
 		// TEST 2 : build transition
 		System.out.println("\nTEST 2 : build transition");
 		AbstractTransition absTrans1 = pna.addAbstractTransition();
@@ -175,6 +200,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("Liste des transitions du PNE : " + pna.getTransitions());
 		System.out.println("Liste des transitions de notre code : " + pna.ourPetri.getMyTransitions());
 
+		
 		// TEST 3 : build an IN arc :
 		System.out.println("\nTEST 3 : build an IN arc");
 		AbstractArc absArcIn1 = null;
@@ -188,6 +214,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
 		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
 
+		
 		// TEST 3bis : build an OUT arc :
 		System.out.println("\nTEST 3bis : build an OUT arc");
 		AbstractArc absArcOut1 = null;
@@ -200,6 +227,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 
 		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
 		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
+		
 		
 		// TEST 4 : set and get multiplicity for Arc IN
 		System.out.println("\nTEST 4 : set and get multiplicity for Arc IN :");
@@ -216,6 +244,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 			e.printStackTrace();
 		}
 		
+		
 		// TEST 4bis : set and get multiplicity for Arc OUT
 		System.out.println("\nTEST 4bis : set and get multiplicity for Arc OUT");
 			// set
@@ -231,12 +260,14 @@ public class PetriNetAdapter extends PetriNetInterface {
 			e.printStackTrace();
 		}
 		
+		
 		// TEST 5 : set and get tokens for Place1
 		System.out.println("\nTEST 5 : set tokens for Place1");
 			// set
 		absPlace1.setTokens(18);
 			// get 
 		System.out.println("Nombre de jetons : " + absPlace1.getTokens());
+		
 		
 		// TEST 5bis : set and get tokens for Place2
 		System.out.println("\nTEST 5bis : set and get tokens for Place2");
@@ -246,7 +277,38 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("Nombre de jetons : " +absPlace2.getTokens());
 		
 		
-		// TEST 6 : fire()
+		//TEST 6 : Build an arc EmptierIn/resetArc
+		System.out.println("\n TEST 6 : Build an arc EmptierIn");
+		AbstractTransition absTrans2 = pna.addAbstractTransition();
+		AbstractPlace absPlace3 = pna.addAbstractPlace();
+		AbstractArc absArcEmptierIn = null;
+		try {
+			absArcEmptierIn = pna.addResArc(absPlace3, absTrans2);
+		} catch (UnimplementedCaseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(absArcEmptierIn);
+
+		System.out.println("(code PNE) Quels sont les arcs co à la transition2 ? : " + pna.getConnectedArcs(absTrans2));
+		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
+		
+		
+		//TEST 7 Build an arc ZeroIn/InibitoryArc
+		System.out.println("\n TEST 7 : Build an arc ZeroIn");
+		AbstractPlace absPlace4 = pna.addAbstractPlace();
+		AbstractArc absArcZeroIn = null;
+		try {
+			absArcZeroIn = pna.addInhibArc(absPlace4, absTrans2);
+		} catch (UnimplementedCaseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(absArcZeroIn);
+
+		System.out.println("(code PNE) Quels sont les arcs co à la transition2 ? : " + pna.getConnectedArcs(absTrans2));
+		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
+		
+		
+		// TEST 8 : fire()
 		System.out.println("\nTEST 6 : fire()");
 		System.out.println("BEFORE : Nombre de jetons Place1 : " + absPlace1.getTokens());
 		System.out.println("BEFORE : Nombre de jetons Place2 : " + absPlace2.getTokens());
