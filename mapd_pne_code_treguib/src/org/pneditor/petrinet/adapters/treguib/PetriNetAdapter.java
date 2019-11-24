@@ -377,25 +377,8 @@ public class PetriNetAdapter extends PetriNetInterface {
 		} catch (ResetArcMultiplicityException e1) {
 			e1.printStackTrace();
 		}
-		
-		// TEST 10 : remove places
-		System.out.println("\nTEST 10 : remove places");
-		System.out.println("BEFORE : Place list in our code : " + pna.ourPetri.getMyPlaces());
-		System.out.println("BEFORE : Place list in PNE code : " + pna.getPlaces());
-		pna.removeAbstractPlace(absPlace1);
-		System.out.println("AFTER : Place list in our code : " + pna.ourPetri.getMyPlaces());
-		System.out.println("AFTER : Place list in PNE code : " + pna.getPlaces());
-		
-		// TEST 11 : remove transitions
-		System.out.println("\nTEST 11 : remove transitions");
-		System.out.println("BEFORE : Transition list in our code : " + pna.ourPetri.getMyTransitions());
-		System.out.println("BEFORE : Transition list in PNE code : " + pna.getTransitions());
-		pna.removeAbstractTransition(absTrans1);
-		System.out.println("AFTER : Transition list in our code : " + pna.ourPetri.getMyTransitions());
-		System.out.println("AFTER : Transition list in PNE code : " + pna.getTransitions());
-		
-		// TEST 12 : remove arcs
-		System.out.println("\nTEST 12 : remove arcs");
+		// TEST 10 : remove arcs
+		System.out.println("\nTEST 10 : remove arcs");
 		System.out.println("BEFORE : Arc list in our code : " + pna.ourPetri.getMyEdges());
 		System.out.println("BEFORE : Arc list of INS connected to transition in our code : " + ((TransitionAdapter)absTrans1).ourTransition.getMyIns());
 		System.out.println("BEFORE : Arc list of OUTS connected to transition in our code : " + ((TransitionAdapter)absTrans1).ourTransition.getMyOuts());
@@ -405,6 +388,24 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("AFTER : Arc list of INS connected to transition in our code : " + ((TransitionAdapter)absTrans1).ourTransition.getMyIns());
 		System.out.println("AFTER : Arc list of OUTS connected to transition in our code : " + ((TransitionAdapter)absTrans1).ourTransition.getMyOuts());
 		System.out.println("AFTER : Arc list in PNE code : " + pna.getConnectedArcs(absTrans1));
+		
+		// TEST 11 : remove places
+		System.out.println("\nTEST 11 : remove places");
+		System.out.println("BEFORE : Place list in our code : " + pna.ourPetri.getMyPlaces());
+		System.out.println("BEFORE : Place list in PNE code : " + pna.getPlaces());
+		pna.removeAbstractPlace(absPlace1);
+		System.out.println("AFTER : Place list in our code : " + pna.ourPetri.getMyPlaces());
+		System.out.println("AFTER : Place list in PNE code : " + pna.getPlaces());
+		
+		// TEST 12 : remove transitions
+		System.out.println("\nTEST 12 : remove transitions");
+		System.out.println("BEFORE : Transition list in our code : " + pna.ourPetri.getMyTransitions());
+		System.out.println("BEFORE : Transition list in PNE code : " + pna.getTransitions());
+		pna.removeAbstractTransition(absTrans1);
+		System.out.println("AFTER : Transition list in our code : " + pna.ourPetri.getMyTransitions());
+		System.out.println("AFTER : Transition list in PNE code : " + pna.getTransitions());
+		
+
 
 
 		// SET TRANSITION TBD
