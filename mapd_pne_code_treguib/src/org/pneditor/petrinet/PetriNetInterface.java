@@ -47,14 +47,15 @@ public abstract class PetriNetInterface {
 	 * Methods used by the software, not defined by the models. It mostly concerns
 	 * stocking the elements, and adding the ID
 	 */
-
+	// DONE
 	public final AbstractPlace addAbstractPlace() { // template pattern
 		final AbstractPlace place = addPlace();
 		this.places.add(place);
 		place.setId(this.nextId++);
 		return place;
 	}
-
+	
+	// NOT DONE : is it useful to test ?
 	public final AbstractPlace addAbstractPlace(final int id) { // template pattern
 		final AbstractPlace place = addPlace();
 		this.places.add(place);
@@ -65,6 +66,7 @@ public abstract class PetriNetInterface {
 		return place;
 	}
 
+	// DONE
 	public final AbstractTransition addAbstractTransition() { // template pattern
 		final AbstractTransition transition = addTransition();
 		this.transitions.add(transition);
@@ -72,6 +74,7 @@ public abstract class PetriNetInterface {
 		return transition;
 	}
 
+	// NOT DONE : is it useful to test ?
 	public final AbstractTransition addAbstractTransition(final int id) { // template pattern
 		final AbstractTransition transition = addTransition();
 		this.transitions.add(transition);
@@ -82,6 +85,7 @@ public abstract class PetriNetInterface {
 		return transition;
 	}
 
+	// DONE 
 	public final AbstractArc addArcAgain(final AbstractArc arc, final AbstractNode source, final AbstractNode destination) {
 		AbstractArc newArc = null;
 		try {
@@ -107,6 +111,7 @@ public abstract class PetriNetInterface {
 		return newArc;
 	}
 
+	// DONE
 	public final AbstractArc addRegArc(final AbstractNode source, final AbstractNode destination)
 			throws UnimplementedCaseException {
 		final AbstractArc arc = addRegularArc(source, destination);
@@ -114,6 +119,7 @@ public abstract class PetriNetInterface {
 		return arc;
 	}
 
+	// DONE
 	public final AbstractArc addInhibArc(final AbstractPlace place, final AbstractTransition transition)
 			throws UnimplementedCaseException {
 		final AbstractArc arc = addInhibitoryArc(place, transition);
@@ -121,6 +127,7 @@ public abstract class PetriNetInterface {
 		return arc;
 	}
 
+	// DONE
 	public final AbstractArc addResArc(final AbstractPlace place, final AbstractTransition transition)
 			throws UnimplementedCaseException {
 		final AbstractArc arc = addResetArc(place, transition);
@@ -128,6 +135,7 @@ public abstract class PetriNetInterface {
 		return arc;
 	}
 
+	// DONE
 	public final void removeAbstractPlace(final AbstractPlace place) {
 		removePlace(place);
 		this.places.remove(place);
@@ -138,6 +146,7 @@ public abstract class PetriNetInterface {
 		this.transitions.remove(transition);
 	}
 
+	// DONE
 	public final void removeAbstractArc(final AbstractArc arc) {
 		removeArc(arc);
 		this.arcs.remove(arc);
@@ -147,6 +156,7 @@ public abstract class PetriNetInterface {
 		return new Boundedness(this).isBounded();
 	}
 
+	// TODO
 	public final AbstractPlace clonePlace(final AbstractPlace place) {
 		final AbstractPlace placeClone = addAbstractPlace();
 		placeClone.setLabel(place.getLabel());
@@ -154,12 +164,14 @@ public abstract class PetriNetInterface {
 		return placeClone;
 	}
 
+	// TODO
 	public final AbstractTransition cloneTransition(final AbstractTransition transition) {
 		final AbstractTransition transitionClone = addAbstractTransition();
 		transitionClone.setLabel(transition.getLabel());
 		return transitionClone;
 	}
 
+	// TODO
 	public final AbstractArc cloneArc(final AbstractArc arc, final AbstractNode source, final AbstractNode destination) {
 		AbstractArc newArc = null;
 		try {
@@ -186,14 +198,17 @@ public abstract class PetriNetInterface {
 	 * 
 	 */
 
+	// DONE
 	public Set<AbstractPlace> getPlaces() {
 		return this.places;
 	}
 
+	// DONE
 	public Set<AbstractTransition> getTransitions() {
 		return this.transitions;
 	}
 
+	// DONE
 	public Set<AbstractArc> getConnectedArcs(final AbstractTransition transition) {
 		final Set<AbstractArc> connectedArcs = new HashSet<>();
 		for (final AbstractArc arc : this.arcs) {
