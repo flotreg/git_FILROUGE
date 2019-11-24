@@ -137,14 +137,15 @@ public class PetriNetAdapter extends PetriNetInterface {
 
 	/**
 	 * This removes a place from the Place List in our petrinetwork
+	 * The removal in PNE code is done automatically
 	 * 
 	 * @param place
 	 */
 	@Override
 	public void removePlace(AbstractPlace place) {
-		int myPlaceId = this.pa.ourPlace.getIdentifier();
-		this.pn.deleteEdge(myPlaceId);
-
+		int placeId = ((PlaceAdapter) place).ourPlace.getIdentifier();
+		System.out.println("DEBUG : Place id : " + placeId);
+		ourPetri.deletePlace(placeId);
 	}
 
 	@Override
@@ -372,6 +373,18 @@ public class PetriNetAdapter extends PetriNetInterface {
 		} catch (ResetArcMultiplicityException e1) {
 			e1.printStackTrace();
 		}
+		
+		// TEST 10 : remove places
+		System.out.println("\nTEST 10 : remove places");
+		System.out.println("BEFORE : Place list in our code : " + pna.ourPetri.getMyPlaces());
+		System.out.println("BEFORE : Place list in PNE code : " + pna.getPlaces());
+		pna.removeAbstractPlace(absPlace1);
+		System.out.println("AFTER : Place list in our code : " + pna.ourPetri.getMyPlaces());
+		System.out.println("AFTER : Place list in PNE code : " + pna.getPlaces());
+		
+		// TEST 11 : remove transitions
+		
+		// TEST 12 : remove arcs
 
 		
 
