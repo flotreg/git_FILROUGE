@@ -150,13 +150,17 @@ public class PetriNetAdapter extends PetriNetInterface {
 
 	@Override
 	public void removeTransition(AbstractTransition transition) {
-		// TODO Auto-generated method stub
+		int transId = ((TransitionAdapter)transition).ourTransition.getIdentifier();
+		System.out.println("DEBUG : Transition id : " + transId);
+		ourPetri.deleteTransition(transId);
 
 	}
 
 	@Override
 	public void removeArc(AbstractArc arc) {
-		// TODO Auto-generated method stub
+		int arcId = ((ArcAdapter)arc).ourArc.getIdentifier();
+		System.out.println("DEBUG : Arc id : " + arcId);
+		ourPetri.deleteTransition(arcId);
 
 	}
 
@@ -383,10 +387,25 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("AFTER : Place list in PNE code : " + pna.getPlaces());
 		
 		// TEST 11 : remove transitions
+		System.out.println("\nTEST 11 : remove transitions");
+		System.out.println("BEFORE : Transition list in our code : " + pna.ourPetri.getMyTransitions());
+		System.out.println("BEFORE : Transition list in PNE code : " + pna.getTransitions());
+		pna.removeAbstractTransition(absTrans1);
+		System.out.println("AFTER : Transition list in our code : " + pna.ourPetri.getMyTransitions());
+		System.out.println("AFTER : Transition list in PNE code : " + pna.getTransitions());
 		
 		// TEST 12 : remove arcs
+		System.out.println("\nTEST 12 : remove arcs");
+		System.out.println("BEFORE : Arc list in our code : " + pna.ourPetri.getMyEdges());
+		System.out.println("BEFORE : Arc list of INS connected to transition in our code : " + ((TransitionAdapter)absTrans1).ourTransition.getMyIns());
+		System.out.println("BEFORE : Arc list of OUTS connected to transition in our code : " + ((TransitionAdapter)absTrans1).ourTransition.getMyOuts());
+		System.out.println("BEFORE : Arc list in PNE code : " + pna.getConnectedArcs(absTrans1));
+		pna.removeAbstractArc(absArcIn1);
+		System.out.println("AFTER : Arc list in our code : " + pna.ourPetri.getMyEdges());
+		System.out.println("AFTER : Arc list of INS connected to transition in our code : " + ((TransitionAdapter)absTrans1).ourTransition.getMyIns());
+		System.out.println("AFTER : Arc list of OUTS connected to transition in our code : " + ((TransitionAdapter)absTrans1).ourTransition.getMyOuts());
+		System.out.println("AFTER : Arc list in PNE code : " + pna.getConnectedArcs(absTrans1));
 
-		
 
 		// SET TRANSITION TBD
 //		for (Integer key : pna.ourPetri.getMyPlaces().keySet()) {
