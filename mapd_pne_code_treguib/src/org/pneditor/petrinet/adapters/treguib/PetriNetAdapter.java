@@ -112,11 +112,13 @@ public class PetriNetAdapter extends PetriNetInterface {
 		aa.ourArc.setMyTransition(ta.ourTransition);
 		return aa;
 	}
+
 	/**
 	 * this returns an ArcAdapter with type Emptier In
+	 * 
 	 * @return Arc Adapter with a type EmptierIn
-	@Override
-	*/
+	 * @Override
+	 */
 	public AbstractArc addResetArc(AbstractPlace place, AbstractTransition transition)
 			throws UnimplementedCaseException {
 		ArcAdapter aa = null;
@@ -159,8 +161,8 @@ public class PetriNetAdapter extends PetriNetInterface {
 
 	@Override
 	public boolean isEnabled(AbstractTransition transition) throws ResetArcMultiplicityException {
-		
-		return false;
+		return ((TransitionAdapter) transition).ourTransition.isFirable();
+
 	}
 
 	@Override
@@ -176,7 +178,6 @@ public class PetriNetAdapter extends PetriNetInterface {
 		PetriNetAdapter pna = new PetriNetAdapter();
 		System.out.println(pna);
 
-		
 		// TEST 1 : build a place
 		System.out.println("\nTEST 1 : build a place");
 		AbstractPlace absPlace1 = pna.addAbstractPlace();
@@ -184,7 +185,6 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("Liste des places du PNE : " + pna.getPlaces());
 		System.out.println("Liste des places de notre code : " + pna.ourPetri.getMyPlaces());
 
-		
 		// TEST 1bis : build a second place
 		System.out.println("\nTEST 1bis : build a second place");
 		AbstractPlace absPlace2 = pna.addAbstractPlace();
@@ -192,7 +192,6 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("Liste des places du PNE : " + pna.getPlaces());
 		System.out.println("Liste des places de notre code : " + pna.ourPetri.getMyPlaces());
 
-		
 		// TEST 2 : build transition
 		System.out.println("\nTEST 2 : build transition");
 		AbstractTransition absTrans1 = pna.addAbstractTransition();
@@ -200,7 +199,6 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("Liste des transitions du PNE : " + pna.getTransitions());
 		System.out.println("Liste des transitions de notre code : " + pna.ourPetri.getMyTransitions());
 
-		
 		// TEST 3 : build an IN arc :
 		System.out.println("\nTEST 3 : build an IN arc");
 		AbstractArc absArcIn1 = null;
@@ -214,7 +212,6 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
 		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
 
-		
 		// TEST 3bis : build an OUT arc :
 		System.out.println("\nTEST 3bis : build an OUT arc");
 		AbstractArc absArcOut1 = null;
@@ -227,24 +224,22 @@ public class PetriNetAdapter extends PetriNetInterface {
 
 		System.out.println("(code PNE) Quels sont les arcs co à la transition1 ? : " + pna.getConnectedArcs(absTrans1));
 		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
-		
-		
+
 		// TEST 4 : set and get multiplicity for Arc IN
 		System.out.println("\nTEST 4 : set and get multiplicity for Arc IN :");
-			// set
+		// set
 		try {
 			absArcIn1.setMultiplicity(13);
 		} catch (ResetArcMultiplicityException e) {
 			e.printStackTrace();
 		}
-			// get
+		// get
 		try {
 			System.out.println("Multiplicité : " + absArcIn1.getMultiplicity());
 		} catch (ResetArcMultiplicityException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		// TEST 4bis : set and get multiplicity for Arc OUT
 		System.out.println("\nTEST 4bis : set and get multiplicity for Arc OUT");
 			// set
@@ -259,52 +254,47 @@ public class PetriNetAdapter extends PetriNetInterface {
 		} catch (ResetArcMultiplicityException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		// TEST 5 : set and get tokens for Place1
 		System.out.println("\nTEST 5 : set tokens for Place1");
 			// set
 		absPlace1.setTokens(18);
-			// get 
+			// get
 		System.out.println("Nombre de jetons : " + absPlace1.getTokens());
-		
-		
+
 		// TEST 5bis : set and get tokens for Place2
 		System.out.println("\nTEST 5bis : set and get tokens for Place2");
 			// set
 		absPlace2.setTokens(58);
 			// get
-		System.out.println("Nombre de jetons : " +absPlace2.getTokens());
-		
-		
-		//TEST 6 : Build an arc EmptierIn/resetArc
+		System.out.println("Nombre de jetons : " + absPlace2.getTokens());
+
+		// TEST 6 : Build an arc EmptierIn/resetArc
 		System.out.println("\n TEST 6 : Build an arc EmptierIn");
 		AbstractTransition absTrans2 = pna.addAbstractTransition();
-			// create new place and add 3 tokens
+		// create new place and add 3 tokens
 		AbstractPlace absPlace3 = pna.addAbstractPlace();
 		absPlace3.addToken();
 		absPlace3.addToken();
 		absPlace3.addToken();
-			// create arc
+		// create arc
 		AbstractArc absArcEmptierIn = null;
 		try {
 			absArcEmptierIn = pna.addResArc(absPlace3, absTrans2);
-		} catch (UnimplementedCaseException e) {
-			e.printStackTrace();
+		} catch (UnimplementedCaseException e3) {
+			e3.printStackTrace();
 		}
 		System.out.println(absArcEmptierIn);
 		System.out.println("(code PNE) Quels sont les arcs co à la transition2 ? : " + pna.getConnectedArcs(absTrans2));
 		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
-		
-		
-		//TEST 7 Build an arc ZeroIn/InibitoryArc
+
+
+		// TEST 7 Build an arc ZeroIn/InibitoryArc
 		System.out.println("\n TEST 7 : Build an arc ZeroIn");
-			// create place and add 1 token
+			// create place and add no token
 		AbstractPlace absPlace4 = pna.addAbstractPlace();
-		// absPlace4.addToken();
 			// create arc
 		AbstractArc absArcZeroIn = null;
-			// fire
 		try {
 			absArcZeroIn = pna.addInhibArc(absPlace4, absTrans2);
 		} catch (UnimplementedCaseException e) {
@@ -313,24 +303,39 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println(absArcZeroIn);
 		System.out.println("(code PNE) Quels sont les arcs co à la transition2 ? : " + pna.getConnectedArcs(absTrans2));
 		System.out.println("Liste des arcs de notre code : " + pna.ourPetri.getMyEdges());
-		
-		
-		// TEST 8 : fire() absTrans1
+
+		// TEST 8 : fire() absTrans1 :
 		System.out.println("\nTEST 8 : fire() absTrans1");
-		System.out.println("BEFORE : Nombre de jetons Place1 : " + absPlace1.getTokens());
-		System.out.println("BEFORE : Nombre de jetons Place2 : " + absPlace2.getTokens());
-			// fire
 		try {
+			System.out.println("Multiplicity RegularIn : Transition1 -> Place 2 : " + absArcOut1.getMultiplicity());
+			System.out.println("Multiplicity RegularOut : Place1 -> Transition1 : " + absArcIn1.getMultiplicity());
+			System.out.println("BEFORE : Nombre de jetons Place1 : " + absPlace1.getTokens());
+			System.out.println("BEFORE : Nombre de jetons Place2 : " + absPlace2.getTokens());
+			System.out.println("Is the transition activable ? " + pna.isEnabled(absTrans1));
 			pna.fire(absTrans1);
-		} catch (ResetArcMultiplicityException e) {
-			e.printStackTrace();
+			System.out.println("AFTER : Nombre de jetons Place1 : " + absPlace1.getTokens());
+			System.out.println("AFTER : Nombre de jetons Place2 : " + absPlace2.getTokens());
+		} catch (ResetArcMultiplicityException e2) {
+			e2.printStackTrace();
 		}
-		
-		System.out.println("AFTER : Nombre de jetons Place1 : " + absPlace1.getTokens());
-		System.out.println("AFTER : Nombre de jetons Place2 : " + absPlace2.getTokens());
-		
-		// TEST 8bis : fire() absTrans2
-		System.out.println("\nTEST 8bis : fire() absTrans2");
+
+		// TEST 8bis : try to fire() absTran1 again :
+		System.out.println("\nTEST 8bis : try to fire() absTran1 again :");
+		try {
+			System.out.println("Multiplicity RegularIn : Transition1 -> Place 2 : " + absArcOut1.getMultiplicity());
+			System.out.println("Multiplicity RegularOut : Place1 -> Transition1 : " + absArcIn1.getMultiplicity());
+			System.out.println("BEFORE : Nombre de jetons Place1 : " + absPlace1.getTokens());
+			System.out.println("BEFORE : Nombre de jetons Place2 : " + absPlace2.getTokens());
+			System.out.println("Is the transition activable ? " + pna.isEnabled(absTrans1));
+			pna.fire(absTrans1);
+			System.out.println("AFTER : Nombre de jetons Place1 : " + absPlace1.getTokens());
+			System.out.println("AFTER : Nombre de jetons Place2 : " + absPlace2.getTokens());
+		} catch (ResetArcMultiplicityException e2) {
+			e2.printStackTrace();
+		}
+
+		// TEST 9 : fire() absTrans2 + addArcAgain()
+		System.out.println("\nTEST 9 : fire() absTrans2");
 			// create a place to receive tokens, set to 10 tokens
 		AbstractPlace absPlace5 = pna.addAbstractPlace();
 		absPlace5.setTokens(10);
@@ -338,25 +343,38 @@ public class PetriNetAdapter extends PetriNetInterface {
 		AbstractArc absArcOut2 = pna.addArcAgain(absArcOut1, absTrans2, absPlace5);
 			// check it has right multiplicity (same as absArcOut1)
 		try {
-			System.out.println("Multiplicity of first arc out : " + absArcOut1.getMultiplicity());
-			System.out.println("Multiplicity of duplicated arc : " + absArcOut2.getMultiplicity());
+			System.out.println("Multiplicity RegularOut (duplicated) : Trans2 -> Place5 : " + absArcOut2.getMultiplicity());
+			System.out.println("BEFORE : Nombre de jetons Place3 (co to Emptier/ResetArc) : " + absPlace3.getTokens());
+			System.out.println("BEFORE : Nombre de jetons Place4 (co to Zero/InhibArc) : " + absPlace4.getTokens());
+			System.out.println("BEFORE : Nombre de jetons Place5 (Receiver) : " + absPlace5.getTokens());
+			System.out.println("Is the transition activable ? " + pna.isEnabled(absTrans2));
+			pna.fire(absTrans2);
+			System.out.println("AFTER : Nombre de jetons Place3 (co to Emptier/ResetArc) : " + absPlace3.getTokens());
+			System.out.println("AFTER : Nombre de jetons Place4 (co to Zero/InhibArc) : " + absPlace4.getTokens());
+			System.out.println("AFTER : Nombre de jetons Place5 (Receiver) : " + absPlace5.getTokens());
 		} catch (ResetArcMultiplicityException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println("BEFORE : Nombre de jetons Place3 (co to Emptier/ResetArc) : " + absPlace3.getTokens());
-		System.out.println("BEFORE : Nombre de jetons Place4 (co to Zero/InhibArc) : " + absPlace4.getTokens());
-		System.out.println("BEFORE : Nombre de jetons Place5 (Receiver) : " + absPlace5.getTokens());
-			// fire
+		
+		// TEST 9bis : set some token on Place before inhib
+		System.out.println("\nTEST 9bis : set some token on the Place before inhib");
+		absPlace4.addToken();
 		try {
+			System.out.println("Multiplicity RegularOut (duplicated) : Trans2 -> Place5 : " + absArcOut2.getMultiplicity());
+			System.out.println("BEFORE : Nombre de jetons Place3 (co to Emptier/ResetArc) : " + absPlace3.getTokens());
+			System.out.println("BEFORE : Nombre de jetons Place4 (co to Zero/InhibArc) : " + absPlace4.getTokens());
+			System.out.println("BEFORE : Nombre de jetons Place5 (Receiver) : " + absPlace5.getTokens());
+			System.out.println("Is the transition activable ? " + pna.isEnabled(absTrans2));
 			pna.fire(absTrans2);
-		} catch (ResetArcMultiplicityException e) {
-			e.printStackTrace();
+			System.out.println("AFTER : Nombre de jetons Place3 (co to Emptier/ResetArc) : " + absPlace3.getTokens());
+			System.out.println("AFTER : Nombre de jetons Place4 (co to Zero/InhibArc) : " + absPlace4.getTokens());
+			System.out.println("AFTER : Nombre de jetons Place5 (Receiver) : " + absPlace5.getTokens());
+		} catch (ResetArcMultiplicityException e1) {
+			e1.printStackTrace();
 		}
+
 		
-		System.out.println("AFTER : Nombre de jetons Place3 (co to Emptier/ResetArc) : " + absPlace3.getTokens());
-		System.out.println("AFTER : Nombre de jetons Place4 (co to Zero/InhibArc) : " + absPlace4.getTokens());
-		System.out.println("AFTER : Nombre de jetons Place5 (Receiver) : " + absPlace5.getTokens());
-		
+
 		// SET TRANSITION TBD
 //		for (Integer key : pna.ourPetri.getMyPlaces().keySet()) {
 //			if (key == 1)
