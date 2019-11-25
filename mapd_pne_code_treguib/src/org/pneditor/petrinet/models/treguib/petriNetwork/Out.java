@@ -66,17 +66,5 @@ public abstract class Out extends Edge {
 	public String toString() {
 		return super.toString() + "\n      Type : Out";
 	}
-	
-
-	/*
-	 * MAIN FOR TESTING
-	 * -> tests in the Edge class
-	 */
-	/**
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-	}
 
 }
