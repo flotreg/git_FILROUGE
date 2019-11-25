@@ -7,25 +7,25 @@ import org.pneditor.petrinet.AbstractTransition;
 import org.pneditor.petrinet.models.treguib.petriNetwork.Transition;
 
 /**
- * 
+ * Transition adapter. 
+ * Has one of our transition in attribute to make the connection with our code.
+ * Does not do a lot compared to our code. 
  * @author f18guibo
  *
  */
 public class TransitionAdapter extends AbstractTransition {
 	
+	/*
+	 * ATTRIBUTES
+	 */
 	protected Transition ourTransition;
 
+	/*
+	 * CONSTRUCTOR
+	 */
 	public TransitionAdapter(String label) {
 		super(label);
 		ourTransition = new Transition();
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
