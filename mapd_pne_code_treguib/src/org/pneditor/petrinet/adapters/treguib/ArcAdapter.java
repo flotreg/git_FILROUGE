@@ -10,14 +10,15 @@ import org.pneditor.petrinet.models.treguib.edges.*;
 import org.pneditor.petrinet.models.treguib.petriNetwork.*;
 
 /**
+ * Adapter for our Edge. 
+ * Place and Transition attributes needed to get sce/dest
  * @author f18guibo
  *
  */
 public class ArcAdapter extends AbstractArc{
 	/*
 	 * ATTRIBUTES
-	 * -> for now the EdgeType attribute is not used
-	 * BUT may be easier to use than ourArc for some cases
+	 * -> TODO use a EdgeType to avoid instanceof() calls
 	 */
 	protected Edge ourArc;
 	protected EdgeTypes ourType;
@@ -28,25 +29,22 @@ public class ArcAdapter extends AbstractArc{
 	 * CONSTRUCTORS
 	 */
 	/**
-	 * NOT OVERRIDE : WILL NOT BE USED IN PNE CODE!!!!!
 	 * Default constructor. 
-	 * Not used right now
+	 * Not used.
 	 */
 	public ArcAdapter() {
-		ourType = EdgeTypes.EmptierIn;
+		super();
 	}
 	
 	/**
-	 * NOT OVERRIDE : WILL NOT BE USED IN PNE CODE!!!!!
 	 * Constructor to have the type In or Out
-	 * If not Regular, then it goes to default
+	 * and subtypes for In
 	 */
 	public ArcAdapter(EdgeTypes e) {
 		ourType = e;
 		switch(e) {
 		case RegularIn:
 			this.ourArc = new RegularIn();
-			this.ourType = EdgeTypes.RegularIn;
 			break;
 		case RegularOut:
 			this.ourArc = new RegularOut();
@@ -60,10 +58,16 @@ public class ArcAdapter extends AbstractArc{
 			break;
 		}
 	}
+	
+	/*
+	 * OVERRIDED METHODS
+	 */
 
 	/**
+	 * getSource of the Arc
 	 * If type is In -> source is a place
 	 * If type is Out -> source is a transition
+	 * @return place or transition
 	 */
 	@Override
 	public AbstractNode getSource() {
@@ -79,8 +83,10 @@ public class ArcAdapter extends AbstractArc{
 	}
 
 	/**
+	 * getDestination of the Arc
 	 * If IN -> destination = transition
 	 * If OUT -> destination = place
+	 * @return place or transition
 	 */
 	@Override
 	public AbstractNode getDestination() {
@@ -96,8 +102,9 @@ public class ArcAdapter extends AbstractArc{
 	}
 
 	/**
-	 * Checks if the arc is emptier in
-	 * TO DO : change instanceof with EdgeTypes
+	 * Checks if the arc is Emptier In
+	 * TODO : change instanceof with EdgeTypes
+	 * @return boolean
 	 */
 	@Override
 	public boolean isReset() {
@@ -109,7 +116,8 @@ public class ArcAdapter extends AbstractArc{
 
 	/**
 	 * Checks if the arc is regular
-	 * TO DO : change instanceof with EdgeTypes
+	 * TODO : change instanceof with EdgeTypes
+	 * @return boolean
 	 */
 	@Override
 	public boolean isRegular() {
@@ -120,11 +128,12 @@ public class ArcAdapter extends AbstractArc{
 	}
 	/**
 	 * Checks if the arc is zero in
-	 * TO DO : change instanceof with EdgeTypes
+	 * TODO : change instanceof with EdgeTypes
+	 * @return boolean
 	 */
 	@Override
 	public boolean isInhibitory() {
-		if (ourArc instanceof ZeroIn) {
+		if (ourType == EdgeTypes.ZeroIn) {
 			return true;
 		}
 		return false;
@@ -133,6 +142,7 @@ public class ArcAdapter extends AbstractArc{
 	/**
 	 * Multiplicity in PNE = Weight in our code.
 	 * Uses getWeight from our code. 
+	 * @return arc weight
 	 */
 	@Override
 	public int getMultiplicity() throws ResetArcMultiplicityException {
@@ -142,19 +152,12 @@ public class ArcAdapter extends AbstractArc{
 	/**
 	 * Multiplicity in PNE = Weight in our code.
 	 * Uses setWeight from our code. 
+	 * @param the desired weight for the arc
 	 */
 	@Override
 	public void setMultiplicity(int multiplicity) throws ResetArcMultiplicityException {
 		this.ourArc.setWeight(multiplicity);
 		
-	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
