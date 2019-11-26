@@ -448,7 +448,6 @@ public class PetriNetAdapter extends PetriNetInterface {
 		System.out.println("AFTER : Transition list in PNE code : " + pna.getTransitions());
 		
 		
-		
 	}
 
 }
