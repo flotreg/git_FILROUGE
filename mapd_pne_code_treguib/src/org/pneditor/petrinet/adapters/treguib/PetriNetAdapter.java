@@ -26,7 +26,7 @@ public class PetriNetAdapter extends PetriNetInterface {
 	/*
 	 * ATTRIBUTES
 	 */
-	PetriNetwork ourPetri = PetriNetwork.getInstance();
+	private PetriNetwork ourPetri = PetriNetwork.getInstance();
 
 	/*
 	 * OVERRIDED METHODS
