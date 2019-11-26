@@ -3,7 +3,9 @@
  */
 package org.pneditor.petrinet.models.treguib.edges;
 
-import org.pneditor.petrinet.models.treguib.petriNetwork.*;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Out;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Place;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Transition;
 
 /**
  * @author Fratoi

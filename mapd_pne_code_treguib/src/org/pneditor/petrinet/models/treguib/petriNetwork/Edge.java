@@ -1,8 +1,12 @@
 package org.pneditor.petrinet.models.treguib.petriNetwork;
 
-import org.pneditor.petrinet.models.treguib.edges.*;
+import org.pneditor.petrinet.models.treguib.edges.EmptierIn;
+import org.pneditor.petrinet.models.treguib.edges.RegularIn;
+import org.pneditor.petrinet.models.treguib.edges.RegularOut;
+import org.pneditor.petrinet.models.treguib.edges.ZeroIn;
 
 /**
+ * 
  * This abstract class represents the edge.
  * It shares global edge attributes.
  * It forces global edge behaviors.

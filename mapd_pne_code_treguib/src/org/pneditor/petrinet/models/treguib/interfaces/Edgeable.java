@@ -1,8 +1,8 @@
 package org.pneditor.petrinet.models.treguib.interfaces;
 
-import org.pneditor.petrinet.models.treguib.exceptions.*;
+import org.pneditor.petrinet.models.treguib.exceptions.AddEdgeException;
 import org.pneditor.petrinet.models.treguib.edges.EdgeTypes;
-import org.pneditor.petrinet.models.treguib.petriNetwork.*;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Edge;
 
 /**
  * This interface makes it possible to add edges. 

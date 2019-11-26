@@ -1,7 +1,5 @@
 package org.pneditor.petrinet.models.treguib.petriNetwork;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.pneditor.petrinet.models.treguib.edges.EdgeTypes;
 

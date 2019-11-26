@@ -3,7 +3,10 @@
  */
 package org.pneditor.petrinet.models.treguib.edges;
 
-import org.pneditor.petrinet.models.treguib.petriNetwork.*;
+import org.pneditor.petrinet.models.treguib.petriNetwork.In;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Place;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Transition;
+
 /**
  * This is the standard type of Edge In.
  * 

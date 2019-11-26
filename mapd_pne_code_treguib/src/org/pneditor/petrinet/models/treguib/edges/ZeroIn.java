@@ -3,7 +3,9 @@
  */
 package org.pneditor.petrinet.models.treguib.edges;
 
-import org.pneditor.petrinet.models.treguib.petriNetwork.*;
+import org.pneditor.petrinet.models.treguib.petriNetwork.In;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Place;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Transition;
 
 /**
  * This type of Edge is activated only if there is no token in the starting

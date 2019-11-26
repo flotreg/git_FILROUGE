@@ -5,7 +5,7 @@ package org.pneditor.petrinet.models.treguib.petriNetwork;
 
 import org.pneditor.petrinet.models.treguib.exceptions.AddEdgeException;
 import org.pneditor.petrinet.models.treguib.interfaces.Edgeable;
-import org.pneditor.petrinet.models.treguib.edges.*;
+import org.pneditor.petrinet.models.treguib.edges.EdgeTypes;
 
 /**
  * Place holds tokens

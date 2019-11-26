@@ -3,10 +3,9 @@
  */
 package org.pneditor.petrinet.models.treguib.petriNetwork;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import org.pneditor.petrinet.models.treguib.edges.*;
+import org.pneditor.petrinet.models.treguib.edges.EdgeTypes;
 import org.pneditor.petrinet.models.treguib.exceptions.AddEdgeException;
 import java.util.concurrent.ConcurrentHashMap;
 import org.pneditor.petrinet.models.treguib.interfaces.Edgeable;

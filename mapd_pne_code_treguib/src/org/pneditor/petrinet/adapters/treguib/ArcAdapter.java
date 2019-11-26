@@ -6,8 +6,14 @@ package org.pneditor.petrinet.adapters.treguib;
 import org.pneditor.petrinet.AbstractArc;
 import org.pneditor.petrinet.AbstractNode;
 import org.pneditor.petrinet.ResetArcMultiplicityException;
-import org.pneditor.petrinet.models.treguib.edges.*;
-import org.pneditor.petrinet.models.treguib.petriNetwork.*;
+import org.pneditor.petrinet.models.treguib.edges.EdgeTypes;
+import org.pneditor.petrinet.models.treguib.edges.EmptierIn;
+import org.pneditor.petrinet.models.treguib.edges.RegularIn;
+import org.pneditor.petrinet.models.treguib.edges.RegularOut;
+import org.pneditor.petrinet.models.treguib.edges.ZeroIn;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Edge;
+import org.pneditor.petrinet.models.treguib.petriNetwork.In;
+import org.pneditor.petrinet.models.treguib.petriNetwork.Out;
 
 /**
  * Adapter for our Edge. 
