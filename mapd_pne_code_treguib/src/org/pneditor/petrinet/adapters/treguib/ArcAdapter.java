@@ -18,7 +18,6 @@ import org.pneditor.petrinet.models.treguib.petriNetwork.*;
 public class ArcAdapter extends AbstractArc{
 	/*
 	 * ATTRIBUTES
-	 * -> TODO use a EdgeType to avoid instanceof() calls
 	 */
 	protected Edge ourArc;
 	protected EdgeTypes ourType;
@@ -103,7 +102,6 @@ public class ArcAdapter extends AbstractArc{
 
 	/**
 	 * Checks if the arc is Emptier In
-	 * TODO : change instanceof with EdgeTypes
 	 * @return boolean
 	 */
 	@Override
@@ -116,7 +114,6 @@ public class ArcAdapter extends AbstractArc{
 
 	/**
 	 * Checks if the arc is regular
-	 * TODO : change instanceof with EdgeTypes
 	 * @return boolean
 	 */
 	@Override
@@ -128,7 +125,6 @@ public class ArcAdapter extends AbstractArc{
 	}
 	/**
 	 * Checks if the arc is zero in
-	 * TODO : change instanceof with EdgeTypes
 	 * @return boolean
 	 */
 	@Override
